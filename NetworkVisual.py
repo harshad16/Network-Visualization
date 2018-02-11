@@ -346,7 +346,6 @@ def cereal_stages():
 
 
     stage_name= str(request.form.get('stage_id'))
-    print "node_name",stage_name
     if stage_name and stage_name!=None:
         n_count=1
         if incoming.get(stage_name):
@@ -376,20 +375,20 @@ def cereal_stages():
                 label.append(item)
         
         # print y_data,x_data,label
-        return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart2.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
-    return render_template('multiplebarChart.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart2.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
 
-@app.route('/perfume_stages', methods=['GET'])
+@app.route('/perfume_stages', methods=['GET','POST'])
 def perfume_stages():
     dataset2 = read_csv(path + '/data/Perfume_SD.csv', header=0)
     newdata = dataset2.drop(['xPosition', 'yPosition'], axis=1)
@@ -443,7 +442,6 @@ def perfume_stages():
 
 
     stage_name= str(request.form.get('stage_id'))
-    print "node_name",stage_name
     if stage_name and stage_name!=None:
         n_count=1
         if incoming.get(stage_name):
@@ -473,7 +471,7 @@ def perfume_stages():
                 label.append(item)
 
         # print y_data,x_data,label
-        return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart2.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
             topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
@@ -482,7 +480,7 @@ def perfume_stages():
                            y5=dataPerfume["StageCost"]['part'], y6=dataPerfume["StageCost"]['manuf'], y7=dataPerfume["StageCost"]['dist'], y8=dataPerfume["StageCost"]['retail'])
 
 
-    return render_template('multiplebarChart.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart2.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
                         topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
@@ -546,7 +544,7 @@ def aircraft_stages():
 
 
     stage_name= str(request.form.get('stage_id'))
-    print "node_name",stage_name
+
     if stage_name and stage_name!=None:
         n_count=1
         if incoming.get(stage_name):
@@ -576,7 +574,7 @@ def aircraft_stages():
                 label.append(item)
 
         # print y_data,x_data,label
-        return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart2.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
                         topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -584,7 +582,7 @@ def aircraft_stages():
                                'manuf'], y3=dataAircraft["StageTime"]['trans'], y4=dataAircraft["StageTime"]['retail'],
                            y5=dataAircraft["StageCost"]['part'], y6=dataAircraft["StageCost"]['manuf'], y7=dataAircraft["StageCost"]['trans'], y8=dataAircraft["StageCost"]['retail'])
 
-    return render_template('multiplebarChart.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart2.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
          topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -647,7 +645,6 @@ def computer_stages():
 
 
     stage_name= str(request.form.get('stage_id'))
-    print "node_name",stage_name
     if stage_name and stage_name!=None:
         n_count=1
         if incoming.get(stage_name):
@@ -677,7 +674,7 @@ def computer_stages():
                 label.append(item)
 
         # print y_data,x_data,label
-        return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart2.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
                          topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -686,7 +683,7 @@ def computer_stages():
                            y5=dataComputer["StageCost"]['part'], y6=dataComputer["StageCost"]['manuf'], y7=dataComputer["StageCost"]['trans'], y8=dataComputer["StageCost"]['retail'])
 
 
-    return render_template('multiplebarChart.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0, 
+    return render_template('multiplebarChart2.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
                             topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',

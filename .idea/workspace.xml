@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ea24d2fa-acc2-438f-9a4a-55ecfb47ff4e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/NetworkVisual.py" afterPath="$PROJECT_DIR$/NetworkVisual.py" />
+      <change beforePath="$PROJECT_DIR$/templates/multiplebarChart2.html" afterPath="$PROJECT_DIR$/templates/multiplebarChart2.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,15 +13,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Network_Visualization$Network_Visualization.coverage" NAME="Network-Visualization Coverage Results" MODIFIED="1518362295854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Network_Visualization$Network_Visualization.coverage" NAME="Network-Visualization Coverage Results" MODIFIED="1518364675518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
       <file leaf-file-name="one-page-wonder.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/css/one-page-wonder.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+            <state relative-caret-position="150">
+              <caret line="141" column="1" lean-forward="false" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -60,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="29" />
+              <caret line="332" column="28" lean-forward="true" selection-start-line="332" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
               <folding>
                 <marker date="1518353914973" expanded="false" signature="16504:16531" ph="..." />
               </folding>
@@ -88,22 +89,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NetworkVisual.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NetworkVisual.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NetworkVisual.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="229" column="83" lean-forward="false" selection-start-line="229" selection-start-column="83" selection-end-line="229" selection-end-column="83" />
+            <state relative-caret-position="150">
+              <caret line="390" column="44" lean-forward="true" selection-start-line="390" selection-start-column="44" selection-end-line="390" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="multiplebarChart2.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="multiplebarChart2.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/multiplebarChart2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="135" column="61" lean-forward="false" selection-start-line="135" selection-start-column="61" selection-end-line="135" selection-end-column="61" />
-              <folding />
+            <state relative-caret-position="300">
+              <caret line="236" column="28" lean-forward="false" selection-start-line="236" selection-start-column="28" selection-end-line="236" selection-end-column="28" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,10 +115,11 @@
       <file leaf-file-name="multiplebarChart.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/multiplebarChart.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1875">
-              <caret line="75" column="5" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="3925">
+              <caret line="241" column="5" lean-forward="false" selection-start-line="249" selection-start-column="63" selection-end-line="250" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,30 +129,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>jqu</find>
-      <find>02</find>
-      <find>plot</find>
-      <find>barchar</find>
-      <find>plot 1</find>
-      <find>zz</find>
-      <find>display-4</find>
-      <find>&gt;</find>
-      <find>e plot measures the vulnerability on a scale for each of the supply chains on a scale of 10</find>
       <find>sta</find>
       <find>state</find>
       <find>stage Data</find>
       <find>bar</find>
       <find>type</find>
       <find>perfume_stages</find>
-      <find>multiplebarChart</find>
-      <find>scr</find>
       <find>v</find>
       <find>Fut</find>
       <find>Nodes per</find>
       <find>chartContainer</find>
       <find>pointer</find>
       <find>itemclick</find>
+      <find>print</find>
+      <find>multiple</find>
+      <find>multiplebarChart</find>
+      <find>perfume_s</find>
+      <find>zz</find>
+      <find>scr</find>
       <find>NetworkVisual.py</find>
+      <find>mit</find>
+      <find>MIT ca</find>
+      <find>Future</find>
+      <find>previous</find>
+      <find>search</find>
+      <find>btn</find>
+      <find>searc</find>
+      <find>stage_id</find>
+      <find>stage_</find>
+      <find>stage</find>
+      <find>submit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,9 +168,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/static/bootstrap/css/bootstrap.css" />
-        <option value="$PROJECT_DIR$/templates/multiplebarChart2.html" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/NetworkVisual.py" />
+        <option value="$PROJECT_DIR$/templates/multiplebarChart2.html" />
       </list>
     </option>
   </component>
@@ -169,7 +180,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-11" />
     <option name="y" value="-11" />
     <option name="width" value="1195" />
@@ -198,6 +209,29 @@
             <path>
               <item name="Network-Visualization" type="b2602c69:ProjectViewProjectNode" />
               <item name="Network-Visualization" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Network-Visualization" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Network-Visualization" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Network-Visualization" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Network-Visualization" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Network-Visualization" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Network-Visualization" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Network-Visualization" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Network-Visualization" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="one-page-wonder.scss" type="620a8d5e:NestingTreeNode" />
             </path>
             <path>
               <item name="Network-Visualization" type="b2602c69:ProjectViewProjectNode" />
@@ -290,13 +324,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1042" extended-state="6" />
+    <frame x="-11" y="-11" width="1942" height="1042" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938388" sideWeight="0.49783784" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938388" sideWeight="0.50216216" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32938388" sideWeight="0.49783784" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32938388" sideWeight="0.49783784" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938388" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -402,6 +437,7 @@
           <caret line="62" column="12" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="12" />
           <folding>
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -460,22 +496,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/one-page-wonder.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/one-page-wonder.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="7" column="3" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/bootstrap/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10425">
@@ -505,10 +525,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/multiplebarChart2.html">
+    <entry file="file://$PROJECT_DIR$/templates/multiplebarChart.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="135" column="61" lean-forward="false" selection-start-line="135" selection-start-column="61" selection-end-line="135" selection-end-column="61" />
+        <state relative-caret-position="3925">
+          <caret line="241" column="5" lean-forward="false" selection-start-line="249" selection-start-column="63" selection-end-line="250" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NetworkVisual.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="390" column="44" lean-forward="true" selection-start-line="390" selection-start-column="44" selection-end-line="390" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -516,28 +547,37 @@
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
-          <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="29" />
+          <caret line="332" column="28" lean-forward="true" selection-start-line="332" selection-start-column="0" selection-end-line="333" selection-end-column="0" />
           <folding>
             <marker date="1518353914973" expanded="false" signature="16504:16531" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/multiplebarChart.html">
+    <entry file="file://$PROJECT_DIR$/static/css/one-page-wonder.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1875">
-          <caret line="75" column="5" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NetworkVisual.py">
+    <entry file="file://$PROJECT_DIR$/static/css/one-page-wonder.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="229" column="83" lean-forward="false" selection-start-line="229" selection-start-column="83" selection-end-line="229" selection-end-column="83" />
+        <state relative-caret-position="150">
+          <caret line="141" column="1" lean-forward="false" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="14" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/multiplebarChart2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="236" column="28" lean-forward="false" selection-start-line="236" selection-start-column="28" selection-end-line="236" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
