@@ -195,7 +195,105 @@ def home_old():
                            )
 
 
-@app.route('/cereal_stages', methods=['GET'])
+# @app.route('/cereal_stages', methods=['GET','POST'])
+# def ():
+#     dataset1 = read_csv(path + '/data/Cereal_SD.csv', low_memory=False)
+#     newdata = dataset1.drop(['xPosition', 'yPosition'], axis=1)
+#     avgdD, countD, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcD = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+#     for index, row in newdata.iterrows():
+#         if str(row['Stage Name']).startswith("Dist_"):
+#             countD = countD + 1
+#             avgdD = avgdD + row['stageTime']
+#             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
+#             avgcD = avgcD + float(temp)
+#         elif str(row['Stage Name']).startswith("Manuf_"):
+#             countM = countM + 1
+#             avgdM = avgdM + row['stageTime']
+#             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
+#             avgcM = avgcM + float(temp)
+#         elif str(row['Stage Name']).startswith("Part_"):
+#             countP = countP + 1
+#             avgdP = avgdP + row['stageTime']
+#             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
+#             avgcP = avgcP + float(temp)
+#         elif str(row['Stage Name']).startswith("Trans_"):
+#             countT = countT + 1
+#             avgdT = avgdT + row['stageTime']
+#             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
+#             avgcT = avgcT + float(temp)
+
+#     dataCereal = {'StageTime': {'part': avgdP / countP, 'manuf': avgdM / countM,
+#                                 'dist': avgdD / countD, 'trans': avgdT / countT},
+#                   'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
+#                                 'dist': avgcD / countD, 'trans': avgcT / countT}}
+
+#     dataset_1 = read_csv(path + '/data/Cereal_LL.csv', low_memory=False, header=0)
+#     key=list(dataset_1["sourceStage"])
+#     value=list(dataset_1["destinationStage"])
+
+#     incoming={}
+#     outgoing={}
+
+#     for i in range(len(key)):
+#         if key[i] not in incoming:
+#             incoming[key[i]]=[value[i]]
+#         else:
+#             incoming[key[i]].extend([value[i]])
+
+#     for i in range(len(value)):
+#         if value[i] not in outgoing:
+#             outgoing[value[i]]=[key[i]]
+#         else:
+#             outgoing[value[i]].extend([key[i]])
+
+
+#     stage_name= str(request.form.get('stage_id'))
+#     print "node_name",stage_name
+#     if stage_name:
+#         n_count=1
+#         if incoming.get(stage_name):
+#             n_count+=len(incoming.get(stage_name))
+#         if outgoing.get(stage_name):
+#             n_count+=len(outgoing.get(stage_name))
+#         x,y,z=50,50,100
+#         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+#         if incoming.get(stage_name):
+#             for i,item in enumerate(incoming[stage_name],1):
+#                 if i%2==0:
+#                     y_data.append(50+3*i)
+#                 else:
+#                     y_data.append(50-3*(i+1))
+#                 x_data.append(30-2*i)
+#                 z_data.append(50)
+#                 label.append(item)
+        
+#         if outgoing.get(stage_name):
+#             for i,item in enumerate(outgoing[stage_name],1):
+#                 if i%2==0:
+#                     y_data.append(50+3*i)
+#                 else:
+#                     y_data.append(50-3*(i+1))
+#                 x_data.append(75+(2*i))
+#                 z_data.append(50)
+#                 label.append(item)
+        
+#         # print y_data,x_data,label
+#         return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+#                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+#                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+#                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
+#                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
+#                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
+#     return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+#                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+#                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+#                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
+#                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
+#                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
+
+
+
+@app.route('/cereal_stages', methods=['GET','POST'])
 def cereal_stages():
     dataset1 = read_csv(path + '/data/Cereal_SD.csv', low_memory=False)
     newdata = dataset1.drop(['xPosition', 'yPosition'], axis=1)
@@ -226,13 +324,70 @@ def cereal_stages():
                                 'dist': avgdD / countD, 'trans': avgdT / countT},
                   'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                 'dist': avgcD / countD, 'trans': avgcT / countT}}
-    return render_template('multiplebarChart2.html', topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
-                           x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
-                           label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
-                           y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"][
-                               'manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
-                           y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
 
+    dataset_1 = read_csv(path + '/data/Cereal_LL.csv', low_memory=False, header=0)
+    key=list(dataset_1["sourceStage"])
+    value=list(dataset_1["destinationStage"])
+
+    incoming={}
+    outgoing={}
+
+    for i in range(len(key)):
+        if key[i] not in incoming:
+            incoming[key[i]]=[value[i]]
+        else:
+            incoming[key[i]].extend([value[i]])
+
+    for i in range(len(value)):
+        if value[i] not in outgoing:
+            outgoing[value[i]]=[key[i]]
+        else:
+            outgoing[value[i]].extend([key[i]])
+
+
+    stage_name= str(request.form.get('stage_id'))
+    print "node_name",stage_name
+    if stage_name and stage_name!=None:
+        n_count=1
+        if incoming.get(stage_name):
+            n_count+=len(incoming.get(stage_name))
+        if outgoing.get(stage_name):
+            n_count+=len(outgoing.get(stage_name))
+        x,y,z=50,50,100
+        x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+        if incoming.get(stage_name):
+            for i,item in enumerate(incoming[stage_name],1):
+                if i%2==0:
+                    y_data.append(50+3*i)
+                else:
+                    y_data.append(50-3*(i+1))
+                x_data.append(35-2*i)
+                z_data.append(50)
+                label.append(item)
+        
+        if outgoing.get(stage_name):
+            for i,item in enumerate(outgoing[stage_name],1):
+                if i%2==0:
+                    y_data.append(50+3*i)
+                else:
+                    y_data.append(50-3*(i+1))
+                x_data.append(65+(2*i))
+                z_data.append(50)
+                label.append(item)
+        
+        # print y_data,x_data,label
+        return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+                                topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                                x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                                label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
+                                y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
+                               y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
+    return render_template('multiplebarChart.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+                                topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                                x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                                label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
+                                y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
+                               y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
 
 @app.route('/perfume_stages', methods=['GET'])
 def perfume_stages():
@@ -267,7 +422,68 @@ def perfume_stages():
                    'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                  'dist': avgcD / countD, 'retail': avgcR / countR}}
 
-    return render_template('multiplebarChart2.html', topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+    dataset_1 = read_csv(path + '/data/Perfume_LL.csv', low_memory=False, header=0)
+    key=list(dataset_1["sourceStage"])
+    value=list(dataset_1["destinationStage"])
+
+    incoming={}
+    outgoing={}
+
+    for i in range(len(key)):
+        if key[i] not in incoming:
+            incoming[key[i]]=[value[i]]
+        else:
+            incoming[key[i]].extend([value[i]])
+
+    for i in range(len(value)):
+        if value[i] not in outgoing:
+            outgoing[value[i]]=[key[i]]
+        else:
+            outgoing[value[i]].extend([key[i]])
+
+
+    stage_name= str(request.form.get('stage_id'))
+    print "node_name",stage_name
+    if stage_name and stage_name!=None:
+        n_count=1
+        if incoming.get(stage_name):
+            n_count+=len(incoming.get(stage_name))
+        if outgoing.get(stage_name):
+            n_count+=len(outgoing.get(stage_name))
+        x,y,z=50,50,100
+        x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+        if incoming.get(stage_name):
+            for i,item in enumerate(incoming[stage_name],1):
+                if i%2==0:
+                    y_data.append(50+3*i)
+                else:
+                    y_data.append(50-3*(i+1))
+                x_data.append(35-2*i)
+                z_data.append(50)
+                label.append(item)
+        
+        if outgoing.get(stage_name):
+            for i,item in enumerate(outgoing[stage_name],1):
+                if i%2==0:
+                    y_data.append(50+3*i)
+                else:
+                    y_data.append(50-3*(i+1))
+                x_data.append(65+(2*i))
+                z_data.append(50)
+                label.append(item)
+
+        # print y_data,x_data,label
+        return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+            topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                           x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                           label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
+                           y1=dataPerfume["StageTime"]['part'], y2=dataPerfume["StageTime"][
+                               'manuf'], y3=dataPerfume["StageTime"]['dist'], y4=dataPerfume["StageTime"]['retail'],
+                           y5=dataPerfume["StageCost"]['part'], y6=dataPerfume["StageCost"]['manuf'], y7=dataPerfume["StageCost"]['dist'], y8=dataPerfume["StageCost"]['retail'])
+
+
+    return render_template('multiplebarChart.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+                        topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
                            y1=dataPerfume["StageTime"]['part'], y2=dataPerfume["StageTime"][
@@ -307,7 +523,69 @@ def aircraft_stages():
                                   'retail': avgdR / countR, 'trans': avgdT / countT},
                     'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                   'retail': avgcR / countR, 'trans': avgcT / countT}}
-    return render_template('multiplebarChart.html', topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+
+
+    dataset_1 = read_csv(path + '/data/Aircarft_LL.csv', low_memory=False, header=0)
+    key=list(dataset_1["sourceStage"])
+    value=list(dataset_1["destinationStage"])
+
+    incoming={}
+    outgoing={}
+
+    for i in range(len(key)):
+        if key[i] not in incoming:
+            incoming[key[i]]=[value[i]]
+        else:
+            incoming[key[i]].extend([value[i]])
+
+    for i in range(len(value)):
+        if value[i] not in outgoing:
+            outgoing[value[i]]=[key[i]]
+        else:
+            outgoing[value[i]].extend([key[i]])
+
+
+    stage_name= str(request.form.get('stage_id'))
+    print "node_name",stage_name
+    if stage_name and stage_name!=None:
+        n_count=1
+        if incoming.get(stage_name):
+            n_count+=len(incoming.get(stage_name))
+        if outgoing.get(stage_name):
+            n_count+=len(outgoing.get(stage_name))
+        x,y,z=50,50,100
+        x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+        if incoming.get(stage_name):
+            for i,item in enumerate(incoming[stage_name],1):
+                if i%2==0:
+                    y_data.append(50+3*i)
+                else:
+                    y_data.append(50-3*(i+1))
+                x_data.append(35-2*i)
+                z_data.append(50)
+                label.append(item)
+        
+        if outgoing.get(stage_name):
+            for i,item in enumerate(outgoing[stage_name],1):
+                if i%2==0:
+                    y_data.append(50+3*i)
+                else:
+                    y_data.append(50-3*(i+1))
+                x_data.append(65+(2*i))
+                z_data.append(50)
+                label.append(item)
+
+        # print y_data,x_data,label
+        return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+                        topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                           x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                           label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
+                           y1=dataAircraft["StageTime"]['part'], y2=dataAircraft["StageTime"][
+                               'manuf'], y3=dataAircraft["StageTime"]['trans'], y4=dataAircraft["StageTime"]['retail'],
+                           y5=dataAircraft["StageCost"]['part'], y6=dataAircraft["StageCost"]['manuf'], y7=dataAircraft["StageCost"]['trans'], y8=dataAircraft["StageCost"]['retail'])
+
+    return render_template('multiplebarChart.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+         topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
                            y1=dataAircraft["StageTime"]['part'], y2=dataAircraft["StageTime"][
@@ -347,7 +625,69 @@ def computer_stages():
                                   'retail': avgdR / countR, 'trans': avgdT / countT},
                     'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                   'retail': avgcR / countR, 'trans': avgcT / countT}}
-    return render_template('multiplebarChart2.html', topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+
+    dataset_1 = read_csv(path + '/data/Computer_LL.csv', low_memory=False, header=0)
+    key=list(dataset_1["sourceStage"])
+    value=list(dataset_1["destinationStage"])
+
+    incoming={}
+    outgoing={}
+
+    for i in range(len(key)):
+        if key[i] not in incoming:
+            incoming[key[i]]=[value[i]]
+        else:
+            incoming[key[i]].extend([value[i]])
+
+    for i in range(len(value)):
+        if value[i] not in outgoing:
+            outgoing[value[i]]=[key[i]]
+        else:
+            outgoing[value[i]].extend([key[i]])
+
+
+    stage_name= str(request.form.get('stage_id'))
+    print "node_name",stage_name
+    if stage_name and stage_name!=None:
+        n_count=1
+        if incoming.get(stage_name):
+            n_count+=len(incoming.get(stage_name))
+        if outgoing.get(stage_name):
+            n_count+=len(outgoing.get(stage_name))
+        x,y,z=50,50,100
+        x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+        if incoming.get(stage_name):
+            for i,item in enumerate(incoming[stage_name],1):
+                if i%2==0:
+                    y_data.append(50+3*i)
+                else:
+                    y_data.append(50-3*(i+1))
+                x_data.append(35-2*i)
+                z_data.append(50)
+                label.append(item)
+        
+        if outgoing.get(stage_name):
+            for i,item in enumerate(outgoing[stage_name],1):
+                if i%2==0:
+                    y_data.append(50+3*i)
+                else:
+                    y_data.append(50-3*(i+1))
+                x_data.append(65+(2*i))
+                z_data.append(50)
+                label.append(item)
+
+        # print y_data,x_data,label
+        return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+                         topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                           x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                           label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
+                           y1=dataComputer["StageTime"]['part'], y2=dataComputer["StageTime"][
+                               'manuf'], y3=dataComputer["StageTime"]['trans'], y4=dataComputer["StageTime"]['retail'],
+                           y5=dataComputer["StageCost"]['part'], y6=dataComputer["StageCost"]['manuf'], y7=dataComputer["StageCost"]['trans'], y8=dataComputer["StageCost"]['retail'])
+
+
+    return render_template('multiplebarChart.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0, 
+                            topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
                            y1=dataComputer["StageTime"]['part'], y2=dataComputer["StageTime"][

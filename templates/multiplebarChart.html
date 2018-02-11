@@ -1,6 +1,127 @@
 <!DOCTYPE HTML>
 <html>
 <head>  
+<style >
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* Style the side navigation */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #4CAF50;
+    overflow-x: hidden;
+}
+
+
+/* Side navigation links */
+.sidenav a {
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+}
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Style the content */
+.content {
+    margin-left: 200px;
+    padding-left: 20px;
+}
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 80%;
+}
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    padding: 16px 32px;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    margin: 4px 2px;
+    box-shadow: #cccccc;
+    cursor: pointer;
+}
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px){
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+</style>	
 <script>
 window.onload = function () {
 
@@ -59,6 +180,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 });
 chart.render();
 
+
 function toggleDataSeries(e) {
 	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
 		e.dataSeries.visible = false;
@@ -69,11 +191,63 @@ function toggleDataSeries(e) {
 	chart.render();
 }
 
+	var x_data={{x_data}}
+	var y_data={{y_data}}
+	var z_data={{z_data}}
+	var label=	{{label|safe}}
+	var n_count = {{n_count}};
+
+	var data_label={}
+	for (i = 0; i < n_count; i++) {
+		data_label[x_data[i]]=label[i]
+	}
+	data_points=[]
+	for (i = 0; i < n_count; i++) { 
+	    data_points[i]={x:x_data[i],y:y_data[i],z:z_data[i],name:label[i]}
+	}
+
+	if (n_count<2){
+		document.getElementById('dynamicContainer').style.visibility="hidden"
+	}
+
+	console.log(data_points)
+	var chart = new CanvasJS.Chart("dynamicContainer",
+	    {
+	      title:{
+	       text: "Comparison among Countries on Fertility Rate Vs Life Expectancy in 2009"
+	      },
+	      data: [
+	      {
+	     type: "bubble",
+	     toolTipContent: "{name}",
+	     dataPoints: data_points
+	   }
+	   ]
+	 });
+	// console.log( e.dataPoint.x)
+	chart.options.data[0].click = function(e)  { 
+	var dataSeries = e.dataSeries;
+    var dataPoint = e.dataPoint;
+    var dataPointIndex = e.dataPointIndex;
+    console.log(data_label[dataPoint.x])
+   	document.getElementById('stage_id').value=data_label[dataPoint.x]
+   	document.getElementById('myform').submit();
+    };
+	chart.render();
 }
+
 </script>
 </head>
 <body>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+
+
+<form id="myform" action="http://localhost:5000/cereal_stages" method=post>
+	<!-- <input type="text" name="stage_id"> -->
+	  <input type="text" name="stage_id" id="stage_id" placeholder="Search ......Stage Node">
+</form>
+ <div id="dynamicContainer" style="height: 300px; width: 100%;">
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>
