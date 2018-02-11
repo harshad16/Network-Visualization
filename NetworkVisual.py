@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Feb 10 19:14:15 2018
+
+@author: abhis
+"""
 from flask import Flask
 from flask import Response, request, render_template, redirect, url_for
 from pandas import read_csv
@@ -5,16 +11,13 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/',methods=['GET'])
+@app.route('/', methods=['GET'])
 def home():
-    dataset1 = read_csv('C:/Users/abhis/PycharmProjects/NetworkVisual/cereal_data.csv', low_memory=False)
-    dataset2 = read_csv('C:/Users/abhis/PycharmProjects/NetworkVisual/Perfume_SD.csv', header=0)
-    dataset3 = read_csv('C:/Users/abhis/PycharmProjects/NetworkVisual/Aircraft_SD.csv', header=0)
-    dataset4 = read_csv('C:/Users/abhis/PycharmProjects/NetworkVisual/Computer_SD.csv', header=0)
-    avgc1 = 0
-    avgc2 = 0
-    avgc3 = 0
-    avgc4 = 0
+    dataset1 = read_csv('data/Cereal_SD.csv', low_memory=False, header=0)
+    dataset2 = read_csv('data/Perfume_SD.csv', low_memory=False, header=0)
+    dataset3 = read_csv('data/Aircraft_SD.csv', low_memory=False, header=0)
+    dataset4 = read_csv('data/Computer_SD.csv', low_memory=False, header=0)
+    avgc1, avgc2, avgc3, avgc4 = 0, 0, 0, 0
     count = 0
     countR1 = 0
     countM1 = 0
@@ -93,6 +96,7 @@ def home():
         avgc3 = avgc3 + int(float(temp))
         if row['relDepth'] != 0:
             dataset3 = dataset3.drop([index], axis=0)
+    
     demand3 = dataset3['avgDemand'].mean()
     avgc3 = avgc3 / count
     count = 0
@@ -115,7 +119,6 @@ def home():
             dataset4 = dataset4.drop([index], axis=0)
     demand4 = dataset4['avgDemand'].mean()
     avgc4 = avgc4 / count
-    data = None
     dataSummary = {'Cereal Co.': {'ChainDemand': demand1,
                                   'ChainCost': avgc1,
                                   'ChainTime': time1,
@@ -152,17 +155,13 @@ def home():
                                                     'Manuf': countM4,
                                                     'Dist': countD4,
                                                     'Retail': countR4}}}
-    data: [{'type': "bar",
-            'dataPoints': [{'label': "Cereal Co.", 'y': 6.17},
-                         {'label': "Perfume Co.", 'y': 101.06},
-                         {'label': "Computer Co.", 'y': 21.74},
-                         {'label': "Aircraft Co.", 'y': 32.93}]}]
-    return render_template('display.html', label1 = 'Cereal Co.', label2 = 'Perfume Co.', label3 = 'Computer Co.',
+    return render_template('display.html', label1='Cereal Co.', label2='Perfume Co.', label3='Computer Co.',
                            label4='Aircraft Co.')
 
-@app.route('/stages',methods=['GET'])
+
+@app.route('/stages', methods=['GET'])
 def stages():
-    dataset1 = read_csv('C:/Users/abhis/PycharmProjects/NetworkVisual/cereal_data.csv', low_memory=False)
+    dataset1 = read_csv('data/Cereal_SD.csv', low_memory=False)
 
     newdata = dataset1.drop(['xPosition', 'yPosition'], axis=1)
 
@@ -205,7 +204,7 @@ def stages():
                   'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
                                 'dist': int(avgcD / countD), 'trans': int(avgcT / countT)}}
 
-    dataset2 = read_csv('C:/Users/abhis/PycharmProjects/NetworkVisual/Perfume_SD.csv', header=0)
+    dataset2 = read_csv('data/Perfume_SD.csv', header=0)
 
     newdata = dataset2.drop(['xPosition', 'yPosition'], axis=1)
 
@@ -248,7 +247,7 @@ def stages():
                    'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
                                  'dist': int(avgcD / countD), 'retail': int(avgcR / countR)}}
 
-    dataset3 = read_csv('C:/Users/abhis/PycharmProjects/NetworkVisual/Aircraft_SD.csv', header=0)
+    dataset3 = read_csv('data/Aircraft_SD.csv', header=0)
 
     newdata = dataset3.drop(['xPosition', 'yPosition'], axis=1)
 
@@ -294,7 +293,7 @@ def stages():
                     'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
                                   'retail': int(avgcR / countR), 'trans': int(avgcT / countT)}}
 
-    dataset4 = read_csv('C:/Users/abhis/PycharmProjects/NetworkVisual/Computer_SD.csv', header=0)
+    dataset4 = read_csv('data/Computer_SD.csv', header=0)
 
     newdata = dataset4.drop(['xPosition', 'yPosition'], axis=1)
 
@@ -336,14 +335,10 @@ def stages():
                                   'retail': int(avgdR / countR), 'trans': int(avgdT / countT)},
                     'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
                                   'retail': int(avgcR / countR), 'trans': int(avgcT / countT)}}
-
-    data: [{'type': "bar",
-            'dataPoints': [{'label': "Cereal Co.", 'y': 6.17},
-                           {'label': "Perfume Co.", 'y': 101.06},
-                           {'label': "Computer Co.", 'y': 21.74},
-                           {'label': "Aircraft Co.", 'y': 32.93}]}]
+    
     return render_template('display.html', label1='Cereal Co.', label2='Perfume Co.', label3='Computer Co.',
                            label4='Aircraft Co.')
 
+
 if __name__ == '__main__':
-    app.run(port=5000,debug=True)
+    app.run(port=5000, debug=True)
