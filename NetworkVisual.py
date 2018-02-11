@@ -2,7 +2,7 @@
 """
 Created on Sat Feb 10 19:14:15 2018
 
-@author: abhis
+@author: abhis,harshad,gurasees
 """
 from flask import Flask
 from flask import Response, request, render_template, redirect, url_for
@@ -12,10 +12,6 @@ import os
 
 app = Flask(__name__)
 path = os.path.dirname(os.path.abspath(__file__))
-
-# @app.route('/', methods=['GET'])
-# def home():
-#     return render_template('index.html')
 
 
 @app.route('/', methods=['GET'])
@@ -194,108 +190,10 @@ def home_old():
                            label5Air=dataSummary['Aircraft Co.']['ChainStages']['Retail']
                            )
 
-
-# @app.route('/cereal_stages', methods=['GET','POST'])
-# def ():
-#     dataset1 = read_csv(path + '/data/Cereal_SD.csv', low_memory=False)
-#     newdata = dataset1.drop(['xPosition', 'yPosition'], axis=1)
-#     avgdD, countD, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcD = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-#     for index, row in newdata.iterrows():
-#         if str(row['Stage Name']).startswith("Dist_"):
-#             countD = countD + 1
-#             avgdD = avgdD + row['stageTime']
-#             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
-#             avgcD = avgcD + float(temp)
-#         elif str(row['Stage Name']).startswith("Manuf_"):
-#             countM = countM + 1
-#             avgdM = avgdM + row['stageTime']
-#             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
-#             avgcM = avgcM + float(temp)
-#         elif str(row['Stage Name']).startswith("Part_"):
-#             countP = countP + 1
-#             avgdP = avgdP + row['stageTime']
-#             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
-#             avgcP = avgcP + float(temp)
-#         elif str(row['Stage Name']).startswith("Trans_"):
-#             countT = countT + 1
-#             avgdT = avgdT + row['stageTime']
-#             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
-#             avgcT = avgcT + float(temp)
-
-#     dataCereal = {'StageTime': {'part': avgdP / countP, 'manuf': avgdM / countM,
-#                                 'dist': avgdD / countD, 'trans': avgdT / countT},
-#                   'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
-#                                 'dist': avgcD / countD, 'trans': avgcT / countT}}
-
-#     dataset_1 = read_csv(path + '/data/Cereal_LL.csv', low_memory=False, header=0)
-#     key=list(dataset_1["sourceStage"])
-#     value=list(dataset_1["destinationStage"])
-
-#     incoming={}
-#     outgoing={}
-
-#     for i in range(len(key)):
-#         if key[i] not in incoming:
-#             incoming[key[i]]=[value[i]]
-#         else:
-#             incoming[key[i]].extend([value[i]])
-
-#     for i in range(len(value)):
-#         if value[i] not in outgoing:
-#             outgoing[value[i]]=[key[i]]
-#         else:
-#             outgoing[value[i]].extend([key[i]])
-
-
-#     stage_name= str(request.form.get('stage_id'))
-#     print "node_name",stage_name
-#     if stage_name:
-#         n_count=1
-#         if incoming.get(stage_name):
-#             n_count+=len(incoming.get(stage_name))
-#         if outgoing.get(stage_name):
-#             n_count+=len(outgoing.get(stage_name))
-#         x,y,z=50,50,100
-#         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
-#         if incoming.get(stage_name):
-#             for i,item in enumerate(incoming[stage_name],1):
-#                 if i%2==0:
-#                     y_data.append(50+3*i)
-#                 else:
-#                     y_data.append(50-3*(i+1))
-#                 x_data.append(30-2*i)
-#                 z_data.append(50)
-#                 label.append(item)
-        
-#         if outgoing.get(stage_name):
-#             for i,item in enumerate(outgoing[stage_name],1):
-#                 if i%2==0:
-#                     y_data.append(50+3*i)
-#                 else:
-#                     y_data.append(50-3*(i+1))
-#                 x_data.append(75+(2*i))
-#                 z_data.append(50)
-#                 label.append(item)
-        
-#         # print y_data,x_data,label
-#         return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
-#                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
-#                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
-#                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
-#                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
-#                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
-#     return render_template('multiplebarChart.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
-#                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
-#                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
-#                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
-#                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
-#                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
-
-
-
 @app.route('/cereal_stages', methods=['GET','POST'])
 def cereal_stages():
     dataset1 = read_csv(path + '/data/Cereal_SD.csv', low_memory=False)
+    dataset1 = dataset1.fillna(0)
     newdata = dataset1.drop(['xPosition', 'yPosition'], axis=1)
     avgdD, countD, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcD = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     for index, row in newdata.iterrows():
@@ -325,6 +223,12 @@ def cereal_stages():
                   'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                 'dist': avgcD / countD, 'trans': avgcT / countT}}
 
+    manu_data={}
+    for i in range(len(dataset1['Stage Name'])):
+        manu_data[dataset1['Stage Name'][i]]={}
+        for item in list(dataset1):
+            manu_data[dataset1['Stage Name'][i]][item]=dataset1[item][i]
+
     dataset_1 = read_csv(path + '/data/Cereal_LL.csv', low_memory=False, header=0)
     key=list(dataset_1["sourceStage"])
     value=list(dataset_1["destinationStage"])
@@ -346,7 +250,7 @@ def cereal_stages():
 
 
     stage_name= str(request.form.get('stage_id'))
-    if stage_name and stage_name!=None:
+    if stage_name and stage_name!="None":
         n_count=1
         if incoming.get(stage_name):
             n_count+=len(incoming.get(stage_name))
@@ -354,6 +258,16 @@ def cereal_stages():
             n_count+=len(outgoing.get(stage_name))
         x,y,z=50,50,100
         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+        if 'stageCost' in manu_data.get(stage_name):
+            stgCost=[manu_data.get(stage_name)['stageCost']]
+        if 'stageTime' in manu_data.get(stage_name):
+            stgTime=[manu_data.get(stage_name)['stageTime']]
+        if 'avgDemand' in manu_data.get(stage_name):
+            avgDd=[manu_data.get(stage_name)['avgDemand']]
+        if 'stdDevDemand' in manu_data.get(stage_name):
+            stdDev=[manu_data.get(stage_name)['stdDevDemand']]
+        if 'relDepth' in manu_data.get(stage_name):
+            relDepth=[manu_data.get(stage_name)['relDepth']]
         if incoming.get(stage_name):
             for i,item in enumerate(incoming[stage_name],1):
                 if i%2==0:
@@ -363,7 +277,21 @@ def cereal_stages():
                 x_data.append(35-2*i)
                 z_data.append(50)
                 label.append(item)
-        
+                if manu_data.get(item) and 'stageCost' in manu_data.get(item):
+                    stgCost.append(manu_data.get(item)['stageCost'])
+                
+                if manu_data.get(item) and 'stageTime' in manu_data.get(item):
+                    stgTime.append(manu_data.get(item)['stageTime'])
+
+                if manu_data.get(item) and 'avgDemand' in manu_data.get(item):
+                    avgDd.append(manu_data.get(item)['avgDemand'])
+
+                if manu_data.get(item) and 'stdDevDemand' in manu_data.get(item):
+                    stdDev.append(manu_data.get(item)['stdDevDemand'])
+
+                if manu_data.get(item) and 'relDepth' in manu_data.get(item):
+                    relDepth.append(manu_data.get(item)['relDepth'])
+
         if outgoing.get(stage_name):
             for i,item in enumerate(outgoing[stage_name],1):
                 if i%2==0:
@@ -373,16 +301,30 @@ def cereal_stages():
                 x_data.append(65+(2*i))
                 z_data.append(50)
                 label.append(item)
-        
-        # print y_data,x_data,label
+                if manu_data.get(item) and 'stageCost' in manu_data.get(item):
+                    stgCost.append(manu_data.get(item)['stageCost'])
+                
+                if manu_data.get(item) and 'stageTime' in manu_data.get(item):
+                    stgTime.append(manu_data.get(item)['stageTime'])
+
+                if manu_data.get(item) and 'avgDemand' in manu_data.get(item):
+                    avgDd.append(manu_data.get(item)['avgDemand'])
+
+                if manu_data.get(item) and 'stdDevDemand' in manu_data.get(item):
+                    stdDev.append(manu_data.get(item)['stdDevDemand'])
+                
+                if manu_data.get(item) and 'relDepth' in manu_data.get(item):
+                    relDepth.append(manu_data.get(item)['relDepth'])        
 
         return render_template('multiplebarChart.html',extension_link="http://localhost:5000/cereal_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+                                stgTime=stgTime,stgCost=json.dumps(stgCost),stdDev=stdDev,avgDd=avgDd,relDepth=relDepth,
                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
     return render_template('multiplebarChart.html',extension_link="http://localhost:5000/cereal_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+                                stgTime=0,stgCost=0,stdDev=0,avgDd=0,relDepth=0,
                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
@@ -392,8 +334,16 @@ def cereal_stages():
 @app.route('/perfume_stages', methods=['GET','POST'])
 def perfume_stages():
     dataset2 = read_csv(path + '/data/Perfume_SD.csv', header=0)
+    dataset2 = dataset2.fillna(0)
     newdata = dataset2.drop(['xPosition', 'yPosition'], axis=1)
     avgdR, countR, avgdM, countM, avgdP, countP, avgdD, countD, avgcD, avgcM, avgcP, avgcR = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
+    manu_data={}
+    for i in range(len(dataset2['Stage Name'])):
+        manu_data[dataset2['Stage Name'][i]]={}
+        for item in list(dataset2):
+            manu_data[dataset2['Stage Name'][i]][item]=dataset2[item][i]
+
 
     for index, row in newdata.iterrows():
         if str(row['Stage Name']).startswith("Dist_"):
@@ -441,9 +391,9 @@ def perfume_stages():
         else:
             outgoing[value[i]].extend([key[i]])
 
-
     stage_name= str(request.form.get('stage_id'))
-    if stage_name and stage_name!=None:
+    print stage_name
+    if stage_name and stage_name!="None":
         n_count=1
         if incoming.get(stage_name):
             n_count+=len(incoming.get(stage_name))
@@ -451,6 +401,16 @@ def perfume_stages():
             n_count+=len(outgoing.get(stage_name))
         x,y,z=50,50,100
         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+        if 'stageCost' in manu_data.get(stage_name):
+            stgCost=[manu_data.get(stage_name)['stageCost']]
+        if 'stageTime' in manu_data.get(stage_name):
+            stgTime=[manu_data.get(stage_name)['stageTime']]
+        if 'avgDemand' in manu_data.get(stage_name):
+            avgDd=[manu_data.get(stage_name)['avgDemand']]
+        if 'stdDevDemand' in manu_data.get(stage_name):
+            stdDev=[manu_data.get(stage_name)['stdDevDemand']]
+        if 'relDepth' in manu_data.get(stage_name):
+            relDepth=[manu_data.get(stage_name)['relDepth']]
         if incoming.get(stage_name):
             for i,item in enumerate(incoming[stage_name],1):
                 if i%2==0:
@@ -460,6 +420,20 @@ def perfume_stages():
                 x_data.append(35-2*i)
                 z_data.append(50)
                 label.append(item)
+                if manu_data.get(item) and 'stageCost' in manu_data.get(item):
+                    stgCost.append(manu_data.get(item)['stageCost'])
+                
+                if manu_data.get(item) and 'stageTime' in manu_data.get(item):
+                    stgTime.append(manu_data.get(item)['stageTime'])
+
+                if manu_data.get(item) and 'avgDemand' in manu_data.get(item):
+                    avgDd.append(manu_data.get(item)['avgDemand'])
+
+                if manu_data.get(item) and 'stdDevDemand' in manu_data.get(item):
+                    stdDev.append(manu_data.get(item)['stdDevDemand'])
+
+                if manu_data.get(item) and 'relDepth' in manu_data.get(item):
+                    relDepth.append(manu_data.get(item)['relDepth'])
         
         if outgoing.get(stage_name):
             for i,item in enumerate(outgoing[stage_name],1):
@@ -470,9 +444,23 @@ def perfume_stages():
                 x_data.append(65+(2*i))
                 z_data.append(50)
                 label.append(item)
+                if manu_data.get(item) and 'stageCost' in manu_data.get(item):
+                    stgCost.append(manu_data.get(item)['stageCost'])
+                
+                if manu_data.get(item) and 'stageTime' in manu_data.get(item):
+                    stgTime.append(manu_data.get(item)['stageTime'])
 
-        # print y_data,x_data,label
+                if manu_data.get(item) and 'avgDemand' in manu_data.get(item):
+                    avgDd.append(manu_data.get(item)['avgDemand'])
+
+                if manu_data.get(item) and 'stdDevDemand' in manu_data.get(item):
+                    stdDev.append(manu_data.get(item)['stdDevDemand'])
+
+                if manu_data.get(item) and 'relDepth' in manu_data.get(item):
+                    relDepth.append(manu_data.get(item)['relDepth'])
+
         return render_template('multiplebarChart.html',extension_link="http://localhost:5000/perfume_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+             stgTime=stgTime,stgCost=json.dumps(stgCost),stdDev=stdDev,avgDd=avgDd,relDepth=relDepth,
             topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
@@ -482,6 +470,7 @@ def perfume_stages():
 
 
     return render_template('multiplebarChart.html',extension_link="http://localhost:5000/perfume_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+         stgTime=0,stgCost=0,stdDev=0,avgDd=0,relDepth=0,
                         topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
@@ -493,9 +482,19 @@ def perfume_stages():
 @app.route('/aircraft_stages', methods=['GET', 'POST'])
 def aircraft_stages():
     dataset3 = read_csv(path + '/data/Aircraft_SD.csv', header=0)
+    dataset3 = dataset3.fillna(0)
     newdata = dataset3.drop(['xPosition', 'yPosition'], axis=1)
 
     avgdR, countR, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcR = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    
+    manu_data={}
+    for i in range(len(dataset3['Stage Name'])):
+        manu_data[dataset3['Stage Name'][i]]={}
+        for item in list(dataset3):
+            manu_data[dataset3['Stage Name'][i]][item]=dataset3[item][i]
+
+
+
     for index, row in newdata.iterrows():
         if str(row['Stage Name']).startswith("Retail_"):
             countR = countR + 1
@@ -546,7 +545,7 @@ def aircraft_stages():
 
     stage_name= str(request.form.get('stage_id'))
 
-    if stage_name and stage_name!=None:
+    if stage_name and stage_name!="None":
         n_count=1
         if incoming.get(stage_name):
             n_count+=len(incoming.get(stage_name))
@@ -554,6 +553,16 @@ def aircraft_stages():
             n_count+=len(outgoing.get(stage_name))
         x,y,z=50,50,100
         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+        if 'stageCost' in manu_data.get(stage_name):
+            stgCost=[manu_data.get(stage_name)['stageCost']]
+        if 'stageTime' in manu_data.get(stage_name):
+            stgTime=[manu_data.get(stage_name)['stageTime']]
+        if 'avgDemand' in manu_data.get(stage_name):
+            avgDd=[manu_data.get(stage_name)['avgDemand']]
+        if 'stdDevDemand' in manu_data.get(stage_name):
+            stdDev=[manu_data.get(stage_name)['stdDevDemand']]
+        if 'relDepth' in manu_data.get(stage_name):
+            relDepth=[manu_data.get(stage_name)['relDepth']]
         if incoming.get(stage_name):
             for i,item in enumerate(incoming[stage_name],1):
                 if i%2==0:
@@ -563,7 +572,21 @@ def aircraft_stages():
                 x_data.append(35-2*i)
                 z_data.append(50)
                 label.append(item)
-        
+                if manu_data.get(item) and 'stageCost' in manu_data.get(item):
+                    stgCost.append(manu_data.get(item)['stageCost'])
+                
+                if manu_data.get(item) and 'stageTime' in manu_data.get(item):
+                    stgTime.append(manu_data.get(item)['stageTime'])
+
+                if manu_data.get(item) and 'avgDemand' in manu_data.get(item):
+                    avgDd.append(manu_data.get(item)['avgDemand'])
+
+                if manu_data.get(item) and 'stdDevDemand' in manu_data.get(item):
+                    stdDev.append(manu_data.get(item)['stdDevDemand'])
+
+                if manu_data.get(item) and 'relDepth' in manu_data.get(item):
+                    relDepth.append(manu_data.get(item)['relDepth'])
+
         if outgoing.get(stage_name):
             for i,item in enumerate(outgoing[stage_name],1):
                 if i%2==0:
@@ -573,9 +596,23 @@ def aircraft_stages():
                 x_data.append(65+(2*i))
                 z_data.append(50)
                 label.append(item)
+                if manu_data.get(item) and 'stageCost' in manu_data.get(item):
+                    stgCost.append(manu_data.get(item)['stageCost'])
+                
+                if manu_data.get(item) and 'stageTime' in manu_data.get(item):
+                    stgTime.append(manu_data.get(item)['stageTime'])
 
-        # print y_data,x_data,label
+                if manu_data.get(item) and 'avgDemand' in manu_data.get(item):
+                    avgDd.append(manu_data.get(item)['avgDemand'])
+
+                if manu_data.get(item) and 'stdDevDemand' in manu_data.get(item):
+                    stdDev.append(manu_data.get(item)['stdDevDemand'])
+
+                if manu_data.get(item) and 'relDepth' in manu_data.get(item):
+                    relDepth.append(manu_data.get(item)['relDepth'])
+
         return render_template('multiplebarChart.html',extension_link="http://localhost:5000/aircraft_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+                         stgTime=stgTime,stgCost=json.dumps(stgCost),stdDev=stdDev,avgDd=avgDd,relDepth=relDepth,
                         topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -584,6 +621,7 @@ def aircraft_stages():
                            y5=dataAircraft["StageCost"]['part'], y6=dataAircraft["StageCost"]['manuf'], y7=dataAircraft["StageCost"]['trans'], y8=dataAircraft["StageCost"]['retail'])
 
     return render_template('multiplebarChart.html',extension_link="http://localhost:5000/aircraft_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+         stgTime=0,stgCost=0,stdDev=0,avgDd=0,relDepth=0,
          topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -595,9 +633,20 @@ def aircraft_stages():
 @app.route('/computer_stages', methods=['GET', 'POST'])
 def computer_stages():
     dataset4 = read_csv(path + '/data/Computer_SD.csv', header=0)
+    dataset4 = dataset4.fillna(0)
     newdata = dataset4.drop(['xPosition', 'yPosition'], axis=1)
 
     avgdR, countR, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcR = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    
+    manu_data={}
+    for i in range(len(dataset4['Stage Name'])):
+        manu_data[dataset4['Stage Name'][i]]={}
+        for item in list(dataset4):
+            manu_data[dataset4['Stage Name'][i]][item]=dataset4[item][i]
+
+
+
+
     for index, row in newdata.iterrows():
         if str(row['Stage Name']).startswith("Retail_"):
             countR = countR + 1
@@ -646,7 +695,7 @@ def computer_stages():
 
 
     stage_name= str(request.form.get('stage_id'))
-    if stage_name and stage_name!=None:
+    if stage_name and stage_name!="None":
         n_count=1
         if incoming.get(stage_name):
             n_count+=len(incoming.get(stage_name))
@@ -654,6 +703,16 @@ def computer_stages():
             n_count+=len(outgoing.get(stage_name))
         x,y,z=50,50,100
         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
+        if 'stageCost' in manu_data.get(stage_name):
+            stgCost=[manu_data.get(stage_name)['stageCost']]
+        if 'stageTime' in manu_data.get(stage_name):
+            stgTime=[manu_data.get(stage_name)['stageTime']]
+        if 'avgDemand' in manu_data.get(stage_name):
+            avgDd=[manu_data.get(stage_name)['avgDemand']]
+        if 'stdDevDemand' in manu_data.get(stage_name):
+            stdDev=[manu_data.get(stage_name)['stdDevDemand']]
+        if 'relDepth' in manu_data.get(stage_name):
+            relDepth=[manu_data.get(stage_name)['relDepth']]
         if incoming.get(stage_name):
             for i,item in enumerate(incoming[stage_name],1):
                 if i%2==0:
@@ -663,6 +722,20 @@ def computer_stages():
                 x_data.append(35-2*i)
                 z_data.append(50)
                 label.append(item)
+                if manu_data.get(item) and 'stageCost' in manu_data.get(item):
+                    stgCost.append(manu_data.get(item)['stageCost'])
+                
+                if manu_data.get(item) and 'stageTime' in manu_data.get(item):
+                    stgTime.append(manu_data.get(item)['stageTime'])
+
+                if manu_data.get(item) and 'avgDemand' in manu_data.get(item):
+                    avgDd.append(manu_data.get(item)['avgDemand'])
+
+                if manu_data.get(item) and 'stdDevDemand' in manu_data.get(item):
+                    stdDev.append(manu_data.get(item)['stdDevDemand'])
+
+                if manu_data.get(item) and 'relDepth' in manu_data.get(item):
+                    relDepth.append(manu_data.get(item)['relDepth'])
         
         if outgoing.get(stage_name):
             for i,item in enumerate(outgoing[stage_name],1):
@@ -673,9 +746,23 @@ def computer_stages():
                 x_data.append(65+(2*i))
                 z_data.append(50)
                 label.append(item)
+                if manu_data.get(item) and 'stageCost' in manu_data.get(item):
+                    stgCost.append(manu_data.get(item)['stageCost'])
+                
+                if manu_data.get(item) and 'stageTime' in manu_data.get(item):
+                    stgTime.append(manu_data.get(item)['stageTime'])
 
-        # print y_data,x_data,label
+                if manu_data.get(item) and 'avgDemand' in manu_data.get(item):
+                    avgDd.append(manu_data.get(item)['avgDemand'])
+
+                if manu_data.get(item) and 'stdDevDemand' in manu_data.get(item):
+                    stdDev.append(manu_data.get(item)['stdDevDemand'])
+
+                if manu_data.get(item) and 'relDepth' in manu_data.get(item):
+                    relDepth.append(manu_data.get(item)['relDepth'])
+
         return render_template('multiplebarChart.html',extension_link="http://localhost:5000/computer_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+             stgTime=stgTime,stgCost=json.dumps(stgCost),stdDev=stdDev,avgDd=avgDd,relDepth=relDepth,
                          topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -684,7 +771,8 @@ def computer_stages():
                            y5=dataComputer["StageCost"]['part'], y6=dataComputer["StageCost"]['manuf'], y7=dataComputer["StageCost"]['trans'], y8=dataComputer["StageCost"]['retail'])
 
 
-    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/computer_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0, 
+    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/computer_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+                             stgTime=0,stgCost=0,stdDev=0,avgDd=0,relDepth=0, 
                             topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
