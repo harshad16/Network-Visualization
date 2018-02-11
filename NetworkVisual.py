@@ -8,8 +8,11 @@ from flask import Flask
 from flask import Response, request, render_template, redirect, url_for
 from pandas import read_csv
 import json
+import os
+
 app = Flask(__name__)
-path="C:/Users/abhis/PycharmProjects/NetworkVisual"
+path=os.path.dirname(os.path.abspath(__file__))
+
 
 @app.route('/', methods=['GET'])
 def home():
