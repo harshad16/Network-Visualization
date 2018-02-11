@@ -114,12 +114,142 @@ function toggleDataSeries(e) {
 	chart.render();
 }
 
+
+var chart = new CanvasJS.Chart("Pie1Container", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	title: {
+		text: "Vulnerability"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
+		dataPoints: [
+			{ y: 46, label: "{{ label1_pie }}" , link:"http://127.0.0.1:5000/cereal_stages"},
+			{ y: 30, label: "{{ label2_pie}}" , link:"http://127.0.0.1:5000/perfume_stages"},
+			{ y: 93, label: "{{ label3_pie}}" , link:"http://127.0.0.1:5000/computer_stages"},
+			{ y: 191, label: "{{ label4_pie}}" , link:"http://127.0.0.1:5000/aircraft_stages"}
+		]
+	}]
+});
+chart.options.data[0].click = function(e) {
+    var dataSeries = e.dataSeries;
+    var dataPoint = e.dataPoint;
+    var dataPointIndex = e.dataPointIndex;
+
+    if (dataPoint.exploded)
+        window.open(dataPoint.link, '_self');
+
+    for (var i = 0; i < dataSeries.dataPoints.length; i++) {
+        if (i === dataPointIndex) {
+            continue;
+        }
+
+        dataSeries.dataPoints[i].exploded = false;
+    }
+};
+chart.render()
+
+var chart = new CanvasJS.Chart("Pie3Container", {
+	animationEnabled: true,
+	title:{
+		text: "Supply Chain length",
+		// horizontalAlign: "left"
+	},
+	data: [{
+		type: "doughnut",
+		startAngle: 60,
+		//innerRadius: 60,
+		indexLabelFontSize: 17,
+		indexLabel: "{label} - #percent%",
+		toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+		dataPoints: [
+			{ y: 105.03, name: "{{ label1_pie }}", label: "{{ label1_pie }}" , link:"http://127.0.0.1:5000/cereal_stages", exploded: true},
+			{ y: 86.93, name: "{{ label2_pie}}" , label: "{{ label2_pie }}", link:"http://127.0.0.1:5000/perfume_stages"},
+			{ y: 114.3, name: "{{ label3_pie}}" , label: "{{ label3_pie }}", link:"http://127.0.0.1:5000/computer_stages"},
+			{ y: 21.47, name: "{{ label4_pie}}" , label: "{{ label4_pie }}", link:"http://127.0.0.1:5000/aircraft_stages"}
+		]
+	}]
+});
+chart.render();
+
+
+
+var chart = new CanvasJS.Chart("Pie2Container", {
+	exportEnabled: true,
+	animationEnabled: true,
+	title:{
+		text: "{{pie_text}}"
+	},
+	legend:{
+		cursor: "pointer",
+		itemclick: explodePie
+	},
+	data: [{
+		type: "pie",
+		showInLegend: true,
+		toolTipContent: "{label}: <strong>{y}%</strong>",
+		indexname: "{label} - {y}%",
+		dataPoints: [
+			{ y: {{y1_pie}}, name: "{{ label1_pie }}", label: "{{ label1_pie }}" , link:"http://127.0.0.1:5000/cereal_stages", exploded: true},
+			{ y: {{y2_pie}}, name: "{{ label2_pie}}" , label: "{{ label2_pie }}", link:"http://127.0.0.1:5000/perfume_stages"},
+			{ y: {{y3_pie}}, name: "{{ label3_pie}}" , label: "{{ label3_pie }}", link:"http://127.0.0.1:5000/computer_stages"},
+			{ y: {{y4_pie}}, name: "{{ label4_pie}}" , label: "{{ label4_pie }}", link:"http://127.0.0.1:5000/aircraft_stages"}
+		]
+	}]
+});
+chart.options.data[0].click = function(e) {
+    var dataSeries = e.dataSeries;
+    var dataPoint = e.dataPoint;
+    var dataPointIndex = e.dataPointIndex;
+
+    if (dataPoint.exploded)
+        window.open(dataPoint.link, '_self');
+
+    for (var i = 0; i < dataSeries.dataPoints.length; i++) {
+        if (i === dataPointIndex) {
+            continue;
+        }
+
+        dataSeries.dataPoints[i].exploded = false;
+    }
+};
+chart.render();
+
+function explodePie (e) {
+	if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+	} else {
+		e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+	}
+	e.chart.render();
+}
+
+
 }
 </script>
 </head>
 <body>
+
+<div id="Pie2Container" style="height: 300px; width: 100%;">
+</div>
+<div id="Pie1Container" style="height: 300px; width: 100%;">
+</div>
+<div id="Pie3Container" style="height: 370px; width: 100%;"></div>
+<br>
+<br>
 <div id="chartContainer" style="height: 300px; width: 100%;">
 </div>
+
+
+
+
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>

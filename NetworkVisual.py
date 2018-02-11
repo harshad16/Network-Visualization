@@ -11,15 +11,19 @@ import json
 import os
 
 app = Flask(__name__)
-path=os.path.dirname(os.path.abspath(__file__))
+path = os.path.dirname(os.path.abspath(__file__))
 
 
 @app.route('/', methods=['GET'])
 def home():
-    dataset1 = read_csv(path+'/data/Cereal_SD.csv', low_memory=False, header=0)
-    dataset2 = read_csv(path+'/data/Perfume_SD.csv', low_memory=False, header=0)
-    dataset3 = read_csv(path+'/data/Aircraft_SD.csv', low_memory=False, header=0)
-    dataset4 = read_csv(path+'/data/Computer_SD.csv', low_memory=False, header=0)
+    dataset1 = read_csv(path + '/data/Cereal_SD.csv',
+                        low_memory=False, header=0)
+    dataset2 = read_csv(path + '/data/Perfume_SD.csv',
+                        low_memory=False, header=0)
+    dataset3 = read_csv(path + '/data/Aircraft_SD.csv',
+                        low_memory=False, header=0)
+    dataset4 = read_csv(path + '/data/Computer_SD.csv',
+                        low_memory=False, header=0)
     avgc1, avgc2, avgc3, avgc4 = 0, 0, 0, 0
     count = 0
     countR1 = 0
@@ -99,7 +103,7 @@ def home():
         avgc3 = avgc3 + int(float(temp))
         if row['relDepth'] != 0:
             dataset3 = dataset3.drop([index], axis=0)
-    
+
     demand3 = dataset3['avgDemand'].mean()
     avgc3 = avgc3 / count
     count = 0
@@ -134,7 +138,7 @@ def home():
                    'Perfume Co.': {'ChainDemand': demand2,
                                    'ChainCost': avgc2,
                                    'ChainTime': time2,
-                                   'ChainMetric': demand2 / (avgc2 * time2),
+                                   'ChainMetric': demand2 / (time2),
                                    'ChainStages': {'Part': countP2,
                                                    'Trans': countT2,
                                                    'Manuf': countM2,
@@ -158,7 +162,13 @@ def home():
                                                     'Manuf': countM4,
                                                     'Dist': countD4,
                                                     'Retail': countR4}}}
-    return render_template('barChart.html', label1Cer=dataSummary['Cereal Co.']['ChainStages']['Part'],
+    return render_template('barChart.html', pie_text="Demands per Cost and Time",
+                           label1_pie='Cereal Co.', y1_pie=dataSummary['Cereal Co.']['ChainMetric'],
+                           label2_pie='Perfume Co.', y2_pie=dataSummary['Perfume Co.']['ChainMetric'],
+                           label3_pie='Computer Co.', y3_pie=dataSummary['Computer Co.']['ChainMetric'],
+                           label4_pie='Aircraft Co.', y4_pie=dataSummary['Aircraft Co.']['ChainMetric'],
+
+                           label1Cer=dataSummary['Cereal Co.']['ChainStages']['Part'],
                            label2Cer=dataSummary['Cereal Co.']['ChainStages']['Trans'],
                            label3Cer=dataSummary['Cereal Co.']['ChainStages']['Manuf'],
                            label4Cer=dataSummary['Cereal Co.']['ChainStages']['Dist'],
@@ -183,9 +193,9 @@ def home():
 
 @app.route('/cereal_stages', methods=['GET'])
 def cereal_stages():
-    dataset1 = read_csv(path+'data/Cereal_SD.csv', low_memory=False)
+    dataset1 = read_csv(path + '/data/Cereal_SD.csv', low_memory=False)
     newdata = dataset1.drop(['xPosition', 'yPosition'], axis=1)
-    avgdD,countD,avgdM,countM ,avgdP ,countP ,avgdT,countT ,avgcT ,avgcM ,avgcP,avgcD = 0,0,0,0,0,0,0,0,0,0,0,0
+    avgdD, countD, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcD = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     for index, row in newdata.iterrows():
         if str(row['Stage Name']).startswith("Dist_"):
             countD = countD + 1
@@ -212,18 +222,20 @@ def cereal_stages():
                                 'dist': avgdD / countD, 'trans': avgdT / countT},
                   'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                 'dist': avgcD / countD, 'trans': avgcT / countT}}
-    return render_template('multiplebarChart.html',topic='Stage data of Cereal Co.',ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
-                        x1name="Stage Time(days)",x1label="Stage Time",x2name="Stage Cost($)",x2label="Stage Cost",
-                        label1='Parts',label2='Manufacture',label3='Transportation',label4='Distribution',
-                    y1=dataCereal["StageTime"]['part'],y2=dataCereal["StageTime"]['manuf'],y3=dataCereal["StageTime"]['trans'],y4=dataCereal["StageTime"]['dist'],
-                    y5=dataCereal["StageCost"]['part'],y6=dataCereal["StageCost"]['manuf'],y7=dataCereal["StageCost"]['trans'],y8=dataCereal["StageCost"]['dist'])
+    return render_template('multiplebarChart.html', topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                           x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                           label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
+                           y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"][
+                               'manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
+                           y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
+
 
 @app.route('/perfume_stages', methods=['GET'])
 def perfume_stages():
-    dataset2 = read_csv(path+'data/Perfume_SD.csv', header=0)
+    dataset2 = read_csv(path + '/data/Perfume_SD.csv', header=0)
     newdata = dataset2.drop(['xPosition', 'yPosition'], axis=1)
-    avgdR,countR,avgdM,countM ,avgdP ,countP ,avgdD,countD ,avgcD ,avgcM ,avgcP,avgcR = 0,0,0,0,0,0,0,0,0,0,0,0
-    
+    avgdR, countR, avgdM, countM, avgdP, countP, avgdD, countD, avgcD, avgcM, avgcP, avgcR = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+
     for index, row in newdata.iterrows():
         if str(row['Stage Name']).startswith("Dist_"):
             countD = countD + 1
@@ -251,18 +263,20 @@ def perfume_stages():
                    'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                  'dist': avgcD / countD, 'retail': avgcR / countR}}
 
-    return render_template('multiplebarChart.html',topic='Stage data of Perfume Co.',ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
-                        x1name="Stage Time(days)",x1label="Stage Time",x2name="Stage Cost($)",x2label="Stage Cost",
-                        label1='Parts',label2='Manufacture',label3='Distribution',label4='Retail',
-                    y1=dataPerfume["StageTime"]['part'],y2=dataPerfume["StageTime"]['manuf'],y3=dataPerfume["StageTime"]['dist'],y4=dataPerfume["StageTime"]['retail'],
-                    y5=dataPerfume["StageCost"]['part'],y6=dataPerfume["StageCost"]['manuf'],y7=dataPerfume["StageCost"]['dist'],y8=dataPerfume["StageCost"]['retail'])
+    return render_template('multiplebarChart.html', topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                           x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                           label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
+                           y1=dataPerfume["StageTime"]['part'], y2=dataPerfume["StageTime"][
+                               'manuf'], y3=dataPerfume["StageTime"]['dist'], y4=dataPerfume["StageTime"]['retail'],
+                           y5=dataPerfume["StageCost"]['part'], y6=dataPerfume["StageCost"]['manuf'], y7=dataPerfume["StageCost"]['dist'], y8=dataPerfume["StageCost"]['retail'])
+
 
 @app.route('/aircraft_stages', methods=['GET'])
 def aircraft_stages():
-    dataset3 = read_csv(path+'data/Aircraft_SD.csv', header=0)
+    dataset3 = read_csv(path + '/data/Aircraft_SD.csv', header=0)
     newdata = dataset3.drop(['xPosition', 'yPosition'], axis=1)
 
-    avgdR,countR,avgdM,countM ,avgdP ,countP ,avgdT,countT ,avgcT ,avgcM ,avgcP,avgcR = 0,0,0,0,0,0,0,0,0,0,0,0
+    avgdR, countR, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcR = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     for index, row in newdata.iterrows():
         if str(row['Stage Name']).startswith("Retail_"):
             countR = countR + 1
@@ -285,24 +299,24 @@ def aircraft_stages():
             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
             avgcT = avgcT + float(temp)
 
-    
     dataAircraft = {'StageTime': {'part': avgdP / countP, 'manuf': avgdM / countM,
                                   'retail': avgdR / countR, 'trans': avgdT / countT},
                     'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                   'retail': avgcR / countR, 'trans': avgcT / countT}}
-    return render_template('multiplebarChart.html',topic='Stage data of Aircraft Co.',ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
-                        x1name="Stage Time(days)",x1label="Stage Time",x2name="Stage Cost($)",x2label="Stage Cost",
-                        label1='Parts',label2='Manufacture',label3='Transportation',label4='Retail',
-                    y1=dataAircraft["StageTime"]['part'],y2=dataAircraft["StageTime"]['manuf'],y3=dataAircraft["StageTime"]['trans'],y4=dataAircraft["StageTime"]['retail'],
-                    y5=dataAircraft["StageCost"]['part'],y6=dataAircraft["StageCost"]['manuf'],y7=dataAircraft["StageCost"]['trans'],y8=dataAircraft["StageCost"]['retail'])
+    return render_template('multiplebarChart.html', topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                           x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                           label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
+                           y1=dataAircraft["StageTime"]['part'], y2=dataAircraft["StageTime"][
+                               'manuf'], y3=dataAircraft["StageTime"]['trans'], y4=dataAircraft["StageTime"]['retail'],
+                           y5=dataAircraft["StageCost"]['part'], y6=dataAircraft["StageCost"]['manuf'], y7=dataAircraft["StageCost"]['trans'], y8=dataAircraft["StageCost"]['retail'])
 
 
 @app.route('/computer_stages', methods=['GET'])
 def computer_stages():
-    dataset4 = read_csv(path+'data/Computer_SD.csv', header=0)
+    dataset4 = read_csv(path + '/data/Computer_SD.csv', header=0)
     newdata = dataset4.drop(['xPosition', 'yPosition'], axis=1)
 
-    avgdR,countR,avgdM,countM ,avgdP ,countP ,avgdT,countT ,avgcT ,avgcM ,avgcP,avgcR = 0,0,0,0,0,0,0,0,0,0,0,0
+    avgdR, countR, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcR = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     for index, row in newdata.iterrows():
         if str(row['Stage Name']).startswith("Retail_"):
             countR = countR + 1
@@ -325,22 +339,17 @@ def computer_stages():
             temp = str(row['stageCost']).lstrip("$").rstrip(" ")
             avgcT = avgcT + float(temp)
 
-    dataComputer = {'StageTime': {'part': int(avgdP / countP), 'manuf': int(avgdM / countM),
-                                  'retail': int(avgdR / countR), 'trans': int(avgdT / countT)},
-                    'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
-                                  'retail': int(avgcR / countR), 'trans': int(avgcT / countT)}}
-    
-    return render_template('pieChart.html', label1='Cereal Co.', label2='Perfume Co.', label3='Computer Co.',
-                           label4='Aircraft Co.')
     dataComputer = {'StageTime': {'part': avgdP / countP, 'manuf': avgdM / countM,
                                   'retail': avgdR / countR, 'trans': avgdT / countT},
                     'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                   'retail': avgcR / countR, 'trans': avgcT / countT}}
-    return render_template('multiplebarChart.html',topic='Stage data of Computer Co.',ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
-                        x1name="Stage Time(days)",x1label="Stage Time",x2name="Stage Cost($)",x2label="Stage Cost",
-                        label1='Parts',label2='Manufacture',label3='Transportation',label4='Retail',
-                    y1=dataComputer["StageTime"]['part'],y2=dataComputer["StageTime"]['manuf'],y3=dataComputer["StageTime"]['trans'],y4=dataComputer["StageTime"]['retail'],
-                    y5=dataComputer["StageCost"]['part'],y6=dataComputer["StageCost"]['manuf'],y7=dataComputer["StageCost"]['trans'],y8=dataComputer["StageCost"]['retail'])
+    return render_template('multiplebarChart.html', topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+                           x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
+                           label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
+                           y1=dataComputer["StageTime"]['part'], y2=dataComputer["StageTime"][
+                               'manuf'], y3=dataComputer["StageTime"]['trans'], y4=dataComputer["StageTime"]['retail'],
+                           y5=dataComputer["StageCost"]['part'], y6=dataComputer["StageCost"]['manuf'], y7=dataComputer["StageCost"]['trans'], y8=dataComputer["StageCost"]['retail'])
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

@@ -4,12 +4,12 @@
 <script>
 window.onload = function() {
 
-var chart = new CanvasJS.Chart("chartContainer", {
+var chart = new CanvasJS.Chart("PieContainer", {
 	theme: "light2", // "light1", "light2", "dark1", "dark2"
 	exportEnabled: true,
 	animationEnabled: true,
 	title: {
-		text: "Desktop Browser Market Share in 2016"
+		text: "{{pie_text}}"
 	},
 	data: [{
 		type: "pie",
@@ -20,10 +20,10 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		indexLabelFontSize: 16,
 		indexLabel: "{label} - {y}%",
 		dataPoints: [
-			{ y: 51.08, label: "{{ label1 }}" , link:"http://127.0.0.1:5000/stages"},
-			{ y: 27.34, label: "{{ label2 }}" },
-			{ y: 10.62, label: "{{ label3 }}" },
-			{ y: 5.02, label: "{{ label4 }}" }
+			{ y: 12, label: "{{ label1_pie }}" , link:"http://127.0.0.1:5000/cereal_stages"},
+			{ y: 33, label: "{{ label2_pie}}" , link:"http://127.0.0.1:5000/perfume_stages"},
+			{ y: 47, label: "{{ label3_pie}}" , link:"http://127.0.0.1:5000/computer_stages"},
+			{ y: 8, label: "{{ label4_pie}}" , link:"http://127.0.0.1:5000/aircraft_stages"}
 		]
 	}]
 });
@@ -49,7 +49,7 @@ chart.render();
 </script>
 </head>
 <body>
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<div id="PieContainer" style="height: 300px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>
