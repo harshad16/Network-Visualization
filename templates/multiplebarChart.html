@@ -1,6 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-<head>  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
 <style >
 * {
     box-sizing: border-box;
@@ -122,14 +123,14 @@ div.desc {
     clear: both;
 }
 </style>	
-<script>
+ <script>
 window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	title:{
 		text: '{{topic}}'
-	},	
+	},
 	axisY: {
 		title: '{{ylabel}}',
 		titleFontColor: "#4F81BC",
@@ -137,14 +138,14 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		labelFontColor: "#4F81BC",
 		tickColor: "#4F81BC"
 	},
-	axisY2: 
+	axisY2:
 	{
 		title: '{{y1label}}',
 		titleFontColor: "#C0504E",
 		lineColor: "#C0504E",
 		labelFontColor: "#C0504E",
 		tickColor: "#C0504E"
-	} ,	
+	} ,
 	toolTip: {
 		shared: true
 	},
@@ -156,7 +157,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		type: "column",
 		name: '{{x1name}}',
 		legendText: '{{x1label}}',
-		showInLegend: true, 
+		showInLegend: true,
 		dataPoints:[
 			{ label: '{{label1}}', y:{{y1}} },
 			{ label: '{{label2}}', y: {{y2}} },
@@ -165,7 +166,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		]
 	},
 	{
-		type: "column",	
+		type: "column",
 		name: '{{x2name}}',
 		legendText: '{{x2label}}',
 		axisYType: "secondary",
@@ -179,7 +180,6 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	}]
 });
 chart.render();
-
 
 function toggleDataSeries(e) {
 	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -234,20 +234,121 @@ function toggleDataSeries(e) {
    	document.getElementById('myform').submit();
     };
 	chart.render();
+	window.scrollTo(500, 500);
 }
-
 </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/one-page-wonder.min.css') }}" rel="stylesheet">
+
+
 </head>
+
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="../">MIT CAVE HACKATHON</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Abhinav</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Harshad</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Gur Asees</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
+<section>
 
-<form id="myform" action="http://localhost:5000/cereal_stages" method=post>
-	<!-- <input type="text" name="stage_id"> -->
-	  <input type="text" name="stage_id" id="stage_id" placeholder="Search ......Stage Node">
-</form>
+                     <a href="../" class="btn btn-btn-secondary btn-xl rounded-pill mt-5">Previous Page</a>
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-2">
+
+
+               <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+
+                </div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h3 class="display-4">Break down of <!--  -->orporations by Performance </h3>
+                    <p>Supply chain Performance Breakdown of individual corporations by Stages</p>
+					<form id="myform" action={{extension_link}} method=post>
+                	  <input type="text" name="stage_id" id="stage_id" placeholder="Search for stage nodes">
+					</form>
+                    {#              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod aliquid, mollitia odio veniam sit iste esse assumenda amet aperiam exercitationem, ea animi blanditiis recusandae! Ratione voluptatum molestiae adipisci, beatae obcaecati.</p>#}
+
+				
+				</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 ">
+                <div class="p-2">
+
+
  <div id="dynamicContainer" style="height: 300px; width: 100%;">
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer class="py-5 bg-black">
+    <div class="container">
+        <p class="m-0 text-center text-white small">Copyright &copy; The A-TEAM MIT CAVE HACKATHON 2018</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
+
 </html>

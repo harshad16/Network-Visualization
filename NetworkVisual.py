@@ -375,13 +375,14 @@ def cereal_stages():
                 label.append(item)
         
         # print y_data,x_data,label
-        return render_template('multiplebarChart2.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+
+        return render_template('multiplebarChart.html',extension_link="http://localhost:5000/cereal_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
-    return render_template('multiplebarChart2.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/cereal_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
@@ -471,7 +472,7 @@ def perfume_stages():
                 label.append(item)
 
         # print y_data,x_data,label
-        return render_template('multiplebarChart2.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart.html',extension_link="http://localhost:5000/perfume_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
             topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
@@ -480,7 +481,7 @@ def perfume_stages():
                            y5=dataPerfume["StageCost"]['part'], y6=dataPerfume["StageCost"]['manuf'], y7=dataPerfume["StageCost"]['dist'], y8=dataPerfume["StageCost"]['retail'])
 
 
-    return render_template('multiplebarChart2.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/perfume_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
                         topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
@@ -489,7 +490,7 @@ def perfume_stages():
                            y5=dataPerfume["StageCost"]['part'], y6=dataPerfume["StageCost"]['manuf'], y7=dataPerfume["StageCost"]['dist'], y8=dataPerfume["StageCost"]['retail'])
 
 
-@app.route('/aircraft_stages', methods=['GET'])
+@app.route('/aircraft_stages', methods=['GET', 'POST'])
 def aircraft_stages():
     dataset3 = read_csv(path + '/data/Aircraft_SD.csv', header=0)
     newdata = dataset3.drop(['xPosition', 'yPosition'], axis=1)
@@ -523,7 +524,7 @@ def aircraft_stages():
                                   'retail': avgcR / countR, 'trans': avgcT / countT}}
 
 
-    dataset_1 = read_csv(path + '/data/Aircarft_LL.csv', low_memory=False, header=0)
+    dataset_1 = read_csv(path + '/data/Aircraft_LL.csv', low_memory=False, header=0)
     key=list(dataset_1["sourceStage"])
     value=list(dataset_1["destinationStage"])
 
@@ -574,7 +575,7 @@ def aircraft_stages():
                 label.append(item)
 
         # print y_data,x_data,label
-        return render_template('multiplebarChart2.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart.html',extension_link="http://localhost:5000/aircraft_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
                         topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -582,7 +583,7 @@ def aircraft_stages():
                                'manuf'], y3=dataAircraft["StageTime"]['trans'], y4=dataAircraft["StageTime"]['retail'],
                            y5=dataAircraft["StageCost"]['part'], y6=dataAircraft["StageCost"]['manuf'], y7=dataAircraft["StageCost"]['trans'], y8=dataAircraft["StageCost"]['retail'])
 
-    return render_template('multiplebarChart2.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/aircraft_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
          topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -591,7 +592,7 @@ def aircraft_stages():
                            y5=dataAircraft["StageCost"]['part'], y6=dataAircraft["StageCost"]['manuf'], y7=dataAircraft["StageCost"]['trans'], y8=dataAircraft["StageCost"]['retail'])
 
 
-@app.route('/computer_stages', methods=['GET'])
+@app.route('/computer_stages', methods=['GET', 'POST'])
 def computer_stages():
     dataset4 = read_csv(path + '/data/Computer_SD.csv', header=0)
     newdata = dataset4.drop(['xPosition', 'yPosition'], axis=1)
@@ -674,7 +675,7 @@ def computer_stages():
                 label.append(item)
 
         # print y_data,x_data,label
-        return render_template('multiplebarChart2.html',y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart.html',extension_link="http://localhost:5000/computer_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
                          topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
@@ -683,7 +684,7 @@ def computer_stages():
                            y5=dataComputer["StageCost"]['part'], y6=dataComputer["StageCost"]['manuf'], y7=dataComputer["StageCost"]['trans'], y8=dataComputer["StageCost"]['retail'])
 
 
-    return render_template('multiplebarChart2.html',y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/computer_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0, 
                             topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
