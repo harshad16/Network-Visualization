@@ -1,16 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
 <script>
 window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	title:{
-		text: "Evening Sales in a Restaurant"
+		text: "Stages per chain"
 	},
-	axisX: {
-		valueFormatString: "DDD"
+    axisX: {
+	    title: "Supply Chain",
+        labelFormatter: function ( e ) {
+               if(e.value == 0){
+                   return "Cereal Co.";
+               }
+               else if(e.value == 1){
+                   return "Perfume Co.";
+               }
+               else if(e.value == 2){
+                   return "Computer Co.";
+               }
+               else if(e.value == 3){
+                   return "Aircraft Co.";
+               }
+               else{
+
+               }
+         }
 	},
 	axisY: {
-		prefix: "$"
+	    title: "Nodes per Stage",
+		suffix: "Nodes"
 	},
 	toolTip: {
 		shared: true
@@ -21,82 +42,63 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	data: [{
 		type: "stackedBar",
-		name: "Meals",
+		name: "Part_",
 		showInLegend: "true",
-		xValueFormatString: "DD, MMM",
-		yValueFormatString: "$#,##0",
+		yValueFormatString: "#,##0Nodes",
 		dataPoints: [
-			{ x: new Date(2017, 0, 30), y: 56 },
-			{ x: new Date(2017, 0, 31), y: 45 },
-			{ x: new Date(2017, 1, 1), y: 71 },
-			{ x: new Date(2017, 1, 2), y: 41 },
-			{ x: new Date(2017, 1, 3), y: 60 },
-			{ x: new Date(2017, 1, 4), y: 75 },
-			{ x: new Date(2017, 1, 5), y: 98 }
+			{ y: {{ label1Cer }},label:"Cereal Co." },
+			{ y: {{ label1Per }},label:"Perfume Co." },
+			{ y: {{ label1Com }},label:"Computer Co." },
+			{ y: {{ label1Air }},label:"Aircraft Co" }
 		]
 	},
 	{
 		type: "stackedBar",
-		name: "Snacks",
+		name: "Trans_",
 		showInLegend: "true",
-		xValueFormatString: "DD, MMM",
-		yValueFormatString: "$#,##0",
+		yValueFormatString: "#,##0Nodes",
 		dataPoints: [
-			{ x: new Date(2017, 0, 30), y: 86 },
-			{ x: new Date(2017, 0, 31), y: 95 },
-			{ x: new Date(2017, 1, 1), y: 71 },
-			{ x: new Date(2017, 1, 2), y: 58 },
-			{ x: new Date(2017, 1, 3), y: 60 },
-			{ x: new Date(2017, 1, 4), y: 65 },
-			{ x: new Date(2017, 1, 5), y: 89 }
+			{ y: {{ label2Cer }},label:"Cereal Co." },
+			{ y: {{ label2Per }},label:"Perfume Co." },
+			{ y: {{ label2Com }},label:"Computer Co." },
+			{ y: {{ label2Air }},label:"Aircraft Co" }
+		]
+
+	},
+	{
+		type: "stackedBar",
+		name: "Manuf_",
+		showInLegend: "true",
+		yValueFormatString: "#,##0Nodes",
+	dataPoints: [
+			{ y: {{ label3Cer }},label:"Cereal Co." },
+			{ y: {{ label3Per }},label:"Perfume Co." },
+			{ y: {{ label3Com }},label:"Computer Co." },
+			{ y: {{ label3Air }},label:"Aircraft Co" }
 		]
 	},
 	{
 		type: "stackedBar",
-		name: "Drinks",
+		name: "Dist_",
 		showInLegend: "true",
-		xValueFormatString: "DD, MMM",
-		yValueFormatString: "$#,##0",
+		yValueFormatString: "#,##0Nodes",
 		dataPoints: [
-			{ x: new Date(2017, 0, 30), y: 48 },
-			{ x: new Date(2017, 0, 31), y: 45 },
-			{ x: new Date(2017, 1, 1), y: 41 },
-			{ x: new Date(2017, 1, 2), y: 55 },
-			{ x: new Date(2017, 1, 3), y: 80 },
-			{ x: new Date(2017, 1, 4), y: 85 },
-			{ x: new Date(2017, 1, 5), y: 83 }
+			{ y: {{ label4Cer }},label:"Cereal Co." },
+			{ y: {{ label4Per }},label:"Perfume Co." },
+			{ y: {{ label4Com }},label:"Computer Co." },
+			{ y: {{ label4Air }},label:"Aircraft Co" }
 		]
 	},
 	{
 		type: "stackedBar",
-		name: "Dessert",
+		name: "Retail_",
 		showInLegend: "true",
-		xValueFormatString: "DD, MMM",
-		yValueFormatString: "$#,##0",
-		dataPoints: [
-			{ x: new Date(2017, 0, 30), y: 61 },
-			{ x: new Date(2017, 0, 31), y: 55 },
-			{ x: new Date(2017, 1, 1), y: 61 },
-			{ x: new Date(2017, 1, 2), y: 75 },
-			{ x: new Date(2017, 1, 3), y: 80 },
-			{ x: new Date(2017, 1, 4), y: 85 },
-			{ x: new Date(2017, 1, 5), y: 105 }
-		]
-	},
-	{
-		type: "stackedBar",
-		name: "Takeaway",
-		showInLegend: "true",
-		xValueFormatString: "DD, MMM",
-		yValueFormatString: "$#,##0",
-		dataPoints: [
-			{ x: new Date(2017, 0, 30), y: 52 },
-			{ x: new Date(2017, 0, 31), y: 55 },
-			{ x: new Date(2017, 1, 1), y: 20 },
-			{ x: new Date(2017, 1, 2), y: 35 },
-			{ x: new Date(2017, 1, 3), y: 30 },
-			{ x: new Date(2017, 1, 4), y: 45 },
-			{ x: new Date(2017, 1, 5), y: 25 }
+		yValueFormatString: "#,##0Nodes",
+	dataPoints: [
+			{ y: {{ label5Cer }},label:"Cereal Co." },
+			{ y: {{ label5Per }},label:"Perfume Co." },
+			{ y: {{ label5Com }},label:"Computer Co." },
+			{ y: {{ label5Air }},label:"Aircraft Co" }
 		]
 	}]
 });
@@ -114,3 +116,10 @@ function toggleDataSeries(e) {
 
 }
 </script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;">
+</div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

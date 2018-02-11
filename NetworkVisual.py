@@ -9,14 +9,14 @@ from flask import Response, request, render_template, redirect, url_for
 from pandas import read_csv
 import json
 app = Flask(__name__)
-
+path="C:/Users/abhis/PycharmProjects/NetworkVisual"
 
 @app.route('/', methods=['GET'])
 def home():
-    dataset1 = read_csv('data/Cereal_SD.csv', low_memory=False, header=0)
-    dataset2 = read_csv('data/Perfume_SD.csv', low_memory=False, header=0)
-    dataset3 = read_csv('data/Aircraft_SD.csv', low_memory=False, header=0)
-    dataset4 = read_csv('data/Computer_SD.csv', low_memory=False, header=0)
+    dataset1 = read_csv(path+'/data/Cereal_SD.csv', low_memory=False, header=0)
+    dataset2 = read_csv(path+'/data/Perfume_SD.csv', low_memory=False, header=0)
+    dataset3 = read_csv(path+'/data/Aircraft_SD.csv', low_memory=False, header=0)
+    dataset4 = read_csv(path+'/data/Computer_SD.csv', low_memory=False, header=0)
     avgc1, avgc2, avgc3, avgc4 = 0, 0, 0, 0
     count = 0
     countR1 = 0
@@ -155,13 +155,32 @@ def home():
                                                     'Manuf': countM4,
                                                     'Dist': countD4,
                                                     'Retail': countR4}}}
-    return render_template('display.html', label1='Cereal Co.', label2='Perfume Co.', label3='Computer Co.',
-                           label4='Aircraft Co.')
+    return render_template('barChart.html', label1Cer=dataSummary['Cereal Co.']['ChainStages']['Part'],
+                           label2Cer=dataSummary['Cereal Co.']['ChainStages']['Trans'],
+                           label3Cer=dataSummary['Cereal Co.']['ChainStages']['Manuf'],
+                           label4Cer=dataSummary['Cereal Co.']['ChainStages']['Dist'],
+                           label5Cer=dataSummary['Cereal Co.']['ChainStages']['Retail'],
+                           label1Per=dataSummary['Perfume Co.']['ChainStages']['Part'],
+                           label2Per=dataSummary['Perfume Co.']['ChainStages']['Trans'],
+                           label3Per=dataSummary['Perfume Co.']['ChainStages']['Manuf'],
+                           label4Per=dataSummary['Perfume Co.']['ChainStages']['Dist'],
+                           label5Per=dataSummary['Perfume Co.']['ChainStages']['Retail'],
+                           label1Com=dataSummary['Computer Co.']['ChainStages']['Part'],
+                           label2Com=dataSummary['Computer Co.']['ChainStages']['Trans'],
+                           label3Com=dataSummary['Computer Co.']['ChainStages']['Manuf'],
+                           label4Com=dataSummary['Computer Co.']['ChainStages']['Dist'],
+                           label5Com=dataSummary['Computer Co.']['ChainStages']['Retail'],
+                           label1Air=dataSummary['Aircraft Co.']['ChainStages']['Part'],
+                           label2Air=dataSummary['Aircraft Co.']['ChainStages']['Trans'],
+                           label3Air=dataSummary['Aircraft Co.']['ChainStages']['Manuf'],
+                           label4Air=dataSummary['Aircraft Co.']['ChainStages']['Dist'],
+                           label5Air=dataSummary['Aircraft Co.']['ChainStages']['Retail']
+                           )
 
 
 @app.route('/stages', methods=['GET'])
 def stages():
-    dataset1 = read_csv('data/Cereal_SD.csv', low_memory=False)
+    dataset1 = read_csv(path+'/data/Cereal_SD.csv', low_memory=False)
 
     newdata = dataset1.drop(['xPosition', 'yPosition'], axis=1)
 
@@ -204,7 +223,7 @@ def stages():
                   'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
                                 'dist': int(avgcD / countD), 'trans': int(avgcT / countT)}}
 
-    dataset2 = read_csv('data/Perfume_SD.csv', header=0)
+    dataset2 = read_csv(path+'/data/Perfume_SD.csv', header=0)
 
     newdata = dataset2.drop(['xPosition', 'yPosition'], axis=1)
 
@@ -247,7 +266,7 @@ def stages():
                    'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
                                  'dist': int(avgcD / countD), 'retail': int(avgcR / countR)}}
 
-    dataset3 = read_csv('data/Aircraft_SD.csv', header=0)
+    dataset3 = read_csv(path+'/data/Aircraft_SD.csv', header=0)
 
     newdata = dataset3.drop(['xPosition', 'yPosition'], axis=1)
 
@@ -293,7 +312,7 @@ def stages():
                     'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
                                   'retail': int(avgcR / countR), 'trans': int(avgcT / countT)}}
 
-    dataset4 = read_csv('data/Computer_SD.csv', header=0)
+    dataset4 = read_csv(path+'/data/Computer_SD.csv', header=0)
 
     newdata = dataset4.drop(['xPosition', 'yPosition'], axis=1)
 
@@ -336,7 +355,7 @@ def stages():
                     'StageCost': {'part': int(avgcP / countP), 'manuf': int(avgcM / countM),
                                   'retail': int(avgcR / countR), 'trans': int(avgcT / countT)}}
     
-    return render_template('display.html', label1='Cereal Co.', label2='Perfume Co.', label3='Computer Co.',
+    return render_template('pieChart.html', label1='Cereal Co.', label2='Perfume Co.', label3='Computer Co.',
                            label4='Aircraft Co.')
 
 
