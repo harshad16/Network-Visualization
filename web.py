@@ -222,7 +222,8 @@ def cereal_stages():
                                 'dist': avgdD / countD, 'trans': avgdT / countT},
                   'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                 'dist': avgcD / countD, 'trans': avgcT / countT}}
-
+    stgTime, stgCost, stdDev, avgDd, relDepth = 0, 0, 0, 0, 0
+    
     manu_data={}
     for i in range(len(dataset1['Stage Name'])):
         manu_data[dataset1['Stage Name'][i]]={}
@@ -258,15 +259,15 @@ def cereal_stages():
             n_count+=len(outgoing.get(stage_name))
         x,y,z=50,50,100
         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
-        if 'stageCost' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stageCost' in manu_data.get(stage_name):
             stgCost=[manu_data.get(stage_name)['stageCost']]
-        if 'stageTime' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stageTime' in manu_data.get(stage_name):
             stgTime=[manu_data.get(stage_name)['stageTime']]
-        if 'avgDemand' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'avgDemand' in manu_data.get(stage_name):
             avgDd=[manu_data.get(stage_name)['avgDemand']]
-        if 'stdDevDemand' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stdDevDemand' in manu_data.get(stage_name):
             stdDev=[manu_data.get(stage_name)['stdDevDemand']]
-        if 'relDepth' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'relDepth' in manu_data.get(stage_name):
             relDepth=[manu_data.get(stage_name)['relDepth']]
         if incoming.get(stage_name):
             for i,item in enumerate(incoming[stage_name],1):
@@ -316,14 +317,14 @@ def cereal_stages():
                 if manu_data.get(item) and 'relDepth' in manu_data.get(item):
                     relDepth.append(manu_data.get(item)['relDepth'])        
 
-        return render_template('multiplebarChart.html',extension_link="http://localhost:5000/cereal_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart.html',extension_link="https://pure-hamlet-40297.herokuapp.com/cereal_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
                                 stgTime=stgTime,stgCost=json.dumps(stgCost),stdDev=stdDev,avgDd=avgDd,relDepth=relDepth,
                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                                 label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
                                 y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"]['manuf'], y3=dataCereal["StageTime"]['trans'], y4=dataCereal["StageTime"]['dist'],
                                y5=dataCereal["StageCost"]['part'], y6=dataCereal["StageCost"]['manuf'], y7=dataCereal["StageCost"]['trans'], y8=dataCereal["StageCost"]['dist'])
-    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/cereal_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart.html',extension_link="https://pure-hamlet-40297.herokuapp.com/cereal_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
                                 stgTime=0,stgCost=0,stdDev=0,avgDd=0,relDepth=0,
                                 topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                                 x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
@@ -337,7 +338,8 @@ def perfume_stages():
     dataset2 = dataset2.fillna(0)
     newdata = dataset2.drop(['xPosition', 'yPosition'], axis=1)
     avgdR, countR, avgdM, countM, avgdP, countP, avgdD, countD, avgcD, avgcM, avgcP, avgcR = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-
+    stgTime, stgCost, stdDev, avgDd, relDepth = 0, 0, 0, 0, 0
+    
     manu_data={}
     for i in range(len(dataset2['Stage Name'])):
         manu_data[dataset2['Stage Name'][i]]={}
@@ -392,7 +394,7 @@ def perfume_stages():
             outgoing[value[i]].extend([key[i]])
 
     stage_name= str(request.form.get('stage_id'))
-    print stage_name
+    print(stage_name)
     if stage_name and stage_name!="None":
         n_count=1
         if incoming.get(stage_name):
@@ -401,16 +403,17 @@ def perfume_stages():
             n_count+=len(outgoing.get(stage_name))
         x,y,z=50,50,100
         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
-        if 'stageCost' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stageCost' in manu_data.get(stage_name):
             stgCost=[manu_data.get(stage_name)['stageCost']]
-        if 'stageTime' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stageTime' in manu_data.get(stage_name):
             stgTime=[manu_data.get(stage_name)['stageTime']]
-        if 'avgDemand' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'avgDemand' in manu_data.get(stage_name):
             avgDd=[manu_data.get(stage_name)['avgDemand']]
-        if 'stdDevDemand' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stdDevDemand' in manu_data.get(stage_name):
             stdDev=[manu_data.get(stage_name)['stdDevDemand']]
-        if 'relDepth' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'relDepth' in manu_data.get(stage_name):
             relDepth=[manu_data.get(stage_name)['relDepth']]
+        
         if incoming.get(stage_name):
             for i,item in enumerate(incoming[stage_name],1):
                 if i%2==0:
@@ -459,7 +462,7 @@ def perfume_stages():
                 if manu_data.get(item) and 'relDepth' in manu_data.get(item):
                     relDepth.append(manu_data.get(item)['relDepth'])
 
-        return render_template('multiplebarChart.html',extension_link="http://localhost:5000/perfume_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart.html',extension_link="https://pure-hamlet-40297.herokuapp.com/perfume_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
              stgTime=stgTime,stgCost=json.dumps(stgCost),stdDev=stdDev,avgDd=avgDd,relDepth=relDepth,
             topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
@@ -469,7 +472,7 @@ def perfume_stages():
                            y5=dataPerfume["StageCost"]['part'], y6=dataPerfume["StageCost"]['manuf'], y7=dataPerfume["StageCost"]['dist'], y8=dataPerfume["StageCost"]['retail'])
 
 
-    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/perfume_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart.html',extension_link="https://pure-hamlet-40297.herokuapp.com/perfume_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
          stgTime=0,stgCost=0,stdDev=0,avgDd=0,relDepth=0,
                         topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
@@ -484,7 +487,7 @@ def aircraft_stages():
     dataset3 = read_csv(path + '/data/Aircraft_SD.csv', header=0)
     dataset3 = dataset3.fillna(0)
     newdata = dataset3.drop(['xPosition', 'yPosition'], axis=1)
-
+    stgTime, stgCost, stdDev, avgDd, relDepth = 0, 0, 0, 0, 0
     avgdR, countR, avgdM, countM, avgdP, countP, avgdT, countT, avgcT, avgcM, avgcP, avgcR = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     
     manu_data={}
@@ -553,15 +556,15 @@ def aircraft_stages():
             n_count+=len(outgoing.get(stage_name))
         x,y,z=50,50,100
         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
-        if 'stageCost' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stageCost' in manu_data.get(stage_name):
             stgCost=[manu_data.get(stage_name)['stageCost']]
-        if 'stageTime' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stageTime' in manu_data.get(stage_name):
             stgTime=[manu_data.get(stage_name)['stageTime']]
-        if 'avgDemand' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'avgDemand' in manu_data.get(stage_name):
             avgDd=[manu_data.get(stage_name)['avgDemand']]
-        if 'stdDevDemand' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stdDevDemand' in manu_data.get(stage_name):
             stdDev=[manu_data.get(stage_name)['stdDevDemand']]
-        if 'relDepth' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'relDepth' in manu_data.get(stage_name):
             relDepth=[manu_data.get(stage_name)['relDepth']]
         if incoming.get(stage_name):
             for i,item in enumerate(incoming[stage_name],1):
@@ -611,7 +614,7 @@ def aircraft_stages():
                 if manu_data.get(item) and 'relDepth' in manu_data.get(item):
                     relDepth.append(manu_data.get(item)['relDepth'])
 
-        return render_template('multiplebarChart.html',extension_link="http://localhost:5000/aircraft_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart.html',extension_link="https://pure-hamlet-40297.herokuapp.com/aircraft_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
                          stgTime=stgTime,stgCost=json.dumps(stgCost),stdDev=stdDev,avgDd=avgDd,relDepth=relDepth,
                         topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
@@ -620,7 +623,7 @@ def aircraft_stages():
                                'manuf'], y3=dataAircraft["StageTime"]['trans'], y4=dataAircraft["StageTime"]['retail'],
                            y5=dataAircraft["StageCost"]['part'], y6=dataAircraft["StageCost"]['manuf'], y7=dataAircraft["StageCost"]['trans'], y8=dataAircraft["StageCost"]['retail'])
 
-    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/aircraft_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart.html',extension_link="https://pure-hamlet-40297.herokuapp.com/aircraft_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
          stgTime=0,stgCost=0,stdDev=0,avgDd=0,relDepth=0,
          topic='Stage data of Aircraft Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
@@ -646,7 +649,8 @@ def computer_stages():
 
 
 
-
+    stgTime, stgCost, stdDev, avgDd, relDepth = 0, 0, 0, 0, 0
+    
     for index, row in newdata.iterrows():
         if str(row['Stage Name']).startswith("Retail_"):
             countR = countR + 1
@@ -703,15 +707,15 @@ def computer_stages():
             n_count+=len(outgoing.get(stage_name))
         x,y,z=50,50,100
         x_data,y_data,z_data,label=[50],[50],[50],[stage_name]
-        if 'stageCost' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stageCost' in manu_data.get(stage_name):
             stgCost=[manu_data.get(stage_name)['stageCost']]
-        if 'stageTime' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stageTime' in manu_data.get(stage_name):
             stgTime=[manu_data.get(stage_name)['stageTime']]
-        if 'avgDemand' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'avgDemand' in manu_data.get(stage_name):
             avgDd=[manu_data.get(stage_name)['avgDemand']]
-        if 'stdDevDemand' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'stdDevDemand' in manu_data.get(stage_name):
             stdDev=[manu_data.get(stage_name)['stdDevDemand']]
-        if 'relDepth' in manu_data.get(stage_name):
+        if manu_data.get(stage_name) and 'relDepth' in manu_data.get(stage_name):
             relDepth=[manu_data.get(stage_name)['relDepth']]
         if incoming.get(stage_name):
             for i,item in enumerate(incoming[stage_name],1):
@@ -761,7 +765,7 @@ def computer_stages():
                 if manu_data.get(item) and 'relDepth' in manu_data.get(item):
                     relDepth.append(manu_data.get(item)['relDepth'])
 
-        return render_template('multiplebarChart.html',extension_link="http://localhost:5000/computer_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
+        return render_template('multiplebarChart.html',extension_link="https://pure-hamlet-40297.herokuapp.com/computer_stages",y_data=y_data,x_data=x_data,z_data=z_data,label=json.dumps(label),n_count=n_count,
              stgTime=stgTime,stgCost=json.dumps(stgCost),stdDev=stdDev,avgDd=avgDd,relDepth=relDepth,
                          topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
@@ -771,7 +775,7 @@ def computer_stages():
                            y5=dataComputer["StageCost"]['part'], y6=dataComputer["StageCost"]['manuf'], y7=dataComputer["StageCost"]['trans'], y8=dataComputer["StageCost"]['retail'])
 
 
-    return render_template('multiplebarChart.html',extension_link="http://localhost:5000/computer_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
+    return render_template('multiplebarChart.html',extension_link="https://pure-hamlet-40297.herokuapp.com/computer_stages",y_data=[],x_data=[],z_data=[],label=[],n_count=0,
                              stgTime=0,stgCost=0,stdDev=0,avgDd=0,relDepth=0, 
                             topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
@@ -781,5 +785,6 @@ def computer_stages():
                            y5=dataComputer["StageCost"]['part'], y6=dataComputer["StageCost"]['manuf'], y7=dataComputer["StageCost"]['trans'], y8=dataComputer["StageCost"]['retail'])
 
 
+
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(host="0.0.0.0", debug=True)
