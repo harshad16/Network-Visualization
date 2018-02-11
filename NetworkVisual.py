@@ -13,9 +13,13 @@ import os
 app = Flask(__name__)
 path = os.path.dirname(os.path.abspath(__file__))
 
+# @app.route('/', methods=['GET'])
+# def home():
+#     return render_template('index.html')
+
 
 @app.route('/', methods=['GET'])
-def home():
+def home_old():
     dataset1 = read_csv(path + '/data/Cereal_SD.csv',
                         low_memory=False, header=0)
     dataset2 = read_csv(path + '/data/Perfume_SD.csv',
@@ -162,7 +166,7 @@ def home():
                                                     'Manuf': countM4,
                                                     'Dist': countD4,
                                                     'Retail': countR4}}}
-    return render_template('barChart.html', pie_text="Demands per Cost and Time",
+    return render_template('index.html', pie_text="Demands per Cost and Time",
                            label1_pie='Cereal Co.', y1_pie=dataSummary['Cereal Co.']['ChainMetric'],
                            label2_pie='Perfume Co.', y2_pie=dataSummary['Perfume Co.']['ChainMetric'],
                            label3_pie='Computer Co.', y3_pie=dataSummary['Computer Co.']['ChainMetric'],
@@ -222,7 +226,7 @@ def cereal_stages():
                                 'dist': avgdD / countD, 'trans': avgdT / countT},
                   'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                 'dist': avgcD / countD, 'trans': avgcT / countT}}
-    return render_template('multiplebarChart.html', topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+    return render_template('multiplebarChart2.html', topic='Stage data of Cereal Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Distribution',
                            y1=dataCereal["StageTime"]['part'], y2=dataCereal["StageTime"][
@@ -263,7 +267,7 @@ def perfume_stages():
                    'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                  'dist': avgcD / countD, 'retail': avgcR / countR}}
 
-    return render_template('multiplebarChart.html', topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+    return render_template('multiplebarChart2.html', topic='Stage data of Perfume Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Distribution', label4='Retail',
                            y1=dataPerfume["StageTime"]['part'], y2=dataPerfume["StageTime"][
@@ -343,7 +347,7 @@ def computer_stages():
                                   'retail': avgdR / countR, 'trans': avgdT / countT},
                     'StageCost': {'part': avgcP / countP, 'manuf': avgcM / countM,
                                   'retail': avgcR / countR, 'trans': avgcT / countT}}
-    return render_template('multiplebarChart.html', topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
+    return render_template('multiplebarChart2.html', topic='Stage data of Computer Co.', ylabel='Stages Time in Supply chain', y1label='Stages Cost in Supply chain',
                            x1name="Stage Time(days)", x1label="Stage Time", x2name="Stage Cost($)", x2label="Stage Cost",
                            label1='Parts', label2='Manufacture', label3='Transportation', label4='Retail',
                            y1=dataComputer["StageTime"]['part'], y2=dataComputer["StageTime"][
