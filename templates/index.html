@@ -116,7 +116,7 @@
             }
 
 
-            var chart = new CanvasJS.Chart("Pie1Container", {
+            var chart1 = new CanvasJS.Chart("Pie1Container", {
                 theme: "light2", // "light1", "light2", "dark1", "dark2"
                 exportEnabled: true,
                 animationEnabled: true,
@@ -139,7 +139,7 @@
                     ]
                 }]
             });
-            chart.options.data[0].click = function (e) {
+            chart1.options.data[0].click = function (e) {
                 var dataSeries = e.dataSeries;
                 var dataPoint = e.dataPoint;
                 var dataPointIndex = e.dataPointIndex;
@@ -155,9 +155,9 @@
                     dataSeries.dataPoints[i].exploded = false;
                 }
             };
-            chart.render()
+            chart1.render()
 
-            var chart = new CanvasJS.Chart("Pie3Container", {
+            var chart2 = new CanvasJS.Chart("Pie3Container", {
                 animationEnabled: true,
                 title: {
                     text: "Supply Chain length",
@@ -199,10 +199,11 @@
                     ]
                 }]
             });
-            chart.render();
+
+            chart2.render();
 
 
-            var chart = new CanvasJS.Chart("Pie2Container", {
+            var chart3 = new CanvasJS.Chart("Pie2Container", {
                 exportEnabled: true,
                 animationEnabled: true,
                 title: {
@@ -246,7 +247,7 @@
                     ]
                 }]
             });
-            chart.options.data[0].click = function (e) {
+            chart3.options.data[0].click = function (e) {
                 var dataSeries = e.dataSeries;
                 var dataPoint = e.dataPoint;
                 var dataPointIndex = e.dataPointIndex;
@@ -262,7 +263,7 @@
                     dataSeries.dataPoints[i].exploded = false;
                 }
             };
-            chart.render();
+            chart3.render();
 
             function explodePie(e) {
                 if (typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
