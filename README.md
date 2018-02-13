@@ -1,5 +1,5 @@
 # Network-Visualization
-# This was an actual submission at the MIT CAVE Hackathon 2018.
+# This was a submission at the MIT CAVE Hackathon 2018.
 # Try out the actual website at the url: https://pure-hamlet-40297.herokuapp.com/
 # Check out our website related documentation at : https://devpost.com/software/cave-hack
 # The 1st page consists of 4 graph plots (3 pie charts and 1 stacked-bar graph) which compare 4 major supply chains.
